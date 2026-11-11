@@ -30,6 +30,10 @@ py-test:
 ingest:
     uv run --project py vsm-ingest run --data-dir data
 
+# Areas and contiguity graph (needs `just ingest`).
+geography:
+    uv run --project py vsm-geography run --data-dir data
+
 # Golden tests against real results (needs `just ingest`).
 golden:
     cargo test --workspace -- --ignored
