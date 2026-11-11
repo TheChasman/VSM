@@ -40,3 +40,15 @@ file = "ons/pcon-2024-uk-bfc.geojson"
 loader = "boundaries"
 layer = "PCON2024"
 redistributable = true
+
+[[source]]
+id = "wd24_pcon24_lad24_lookup"
+# ONS Ward to Westminster Parliamentary Constituency to LAD to UTLA (July 2024) Lookup in the UK,
+# "as at 4th July 2024" (the GE2024 polling day). Whole-file CSV from the ONS Open Geography hub.
+url = "https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/62eb9df29a2f4521b5076a419ff9a47e/csv?layers=0"
+licence = "OGL-3.0"
+sha256 = "c6d7029b36014bb1cf8eaf7e7e11688e1e5f2297039a0f4e32e9a5ca805d457c"
+file = "ons/wd24-pcon24-lad24-utla24-uk-lu.csv"
+loader = "ons_wd_pcon_lad_lookup"
+redistributable = true
+layer = "WD20240704"

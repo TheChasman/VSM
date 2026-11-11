@@ -130,7 +130,13 @@ def _bad_nation(gss: str, row: dict[str, str]) -> str:
 
 
 def load(
-    conn: sqlite3.Connection, source: Source, path: Path, sha256: str, registry: Registry, layer=None
+    conn: sqlite3.Connection,
+    source: Source,
+    path: Path,
+    sha256: str,
+    registry: Registry,
+    layer=None,
+    layers=None,
 ) -> int:
     """Write one election in a single transaction. Re-running replaces that election's rows."""
     if not (source.election_id and source.office and source.boundary_set):

@@ -53,3 +53,9 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 ## Slice 6: geography register (ADR-0014)
 
 14. **Register in ingest.** `data/geographies.toml` loads into `geography_layer` on every run (`geography_link` table created, unused until the first lookup lands). Every source may name a `layer`; boundary sources must. Ingest stops if a layer is unregistered, a register entry is malformed or names an unknown source, or any GSS code in a results or boundary file falls outside its layer's prefixes. `reference.sqlite` schema version 2: rebuild with `just ingest && just geography`.
+
+## Slice 7: wards and local authorities at polling day
+
+15. **ONS ward lookup** (`ons_wd_pcon_lad_lookup`): the July 2024 Ward → PCON → LAD → UTLA lookup ("as at 4th July 2024"), pinned whole-file CSV. Layers `WD20240704` and `LAD20240704` registered. Writes `geography_link`: ward → local authority (exact, every ward nests), ward → constituency (exact, or `partial` with no share for the 388 split wards). Stops on wards in more than one local authority or split wards not flagged. Two wards flagged split but listed once (E05015879 St Mary's, S13003041 Irvine South) are recorded as `partial` with a warning. Schema version 3.
+
+**Deviation recorded:** ADR-0014 amended with the `partial` relation (official membership, share NULL), because ONS publishes no shares for split wards. Constituency → local authority shares for G3 are not computed: that waits for the G3 rule (area or electors).

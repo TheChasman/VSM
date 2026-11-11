@@ -128,8 +128,8 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 |-------|------|----------|-------|
 | from_layer, to_layer | TEXT | no | FK to `geography_layer` |
 | from_code, to_code | TEXT | no | GSS codes |
-| relation | TEXT | no | `exact`, `best_fit_population` or `area_weighted` |
-| share | REAL | no | 1.0 for `exact`; otherwise the share of `from_code` assigned to `to_code` |
+| relation | TEXT | no | `exact`, `best_fit_population`, `area_weighted` or `partial` (official membership, no share; ADR-0014 amendment) |
+| share | REAL | yes | 1.0 for `exact`; NULL for `partial`; otherwise the share of `from_code` assigned to `to_code` |
 | derived | INTEGER | no | 1 when computed by VSM rather than taken from an official lookup |
 
 #### candidate_result

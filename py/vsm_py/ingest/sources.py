@@ -9,7 +9,7 @@ from pathlib import Path
 from . import IngestError
 
 # "boundaries" sources are fetched and verified here, then read by the geography stage.
-LOADERS = {"commons_candidacies", "boundaries"}
+LOADERS = {"commons_candidacies", "boundaries", "ons_wd_pcon_lad_lookup"}
 
 
 @dataclass(frozen=True)

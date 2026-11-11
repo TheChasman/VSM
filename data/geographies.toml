@@ -10,8 +10,25 @@ valid_from = "2024-05-31"
 source = "pcon2024_boundaries"
 profiles = ["commons"]
 
+[[layer]]
+id = "WD20240704"
+description = "Electoral wards and divisions as at the GE2024 polling day"
+gss_prefixes = ["E05", "W05", "S13", "N08"]
+drawn_by = ["Local Government Boundary Commission for England", "Democracy and Boundary Commission Cymru", "Boundary Scotland", "Local Government Boundaries Commissioner for Northern Ireland"]
+valid_from = "2024-07-04"
+source = "wd24_pcon24_lad24_lookup"
+profiles = ["commons"]
+
+[[layer]]
+id = "LAD20240704"
+description = "Local authority districts as at the GE2024 polling day (G3 vintage, ADR-0014)"
+gss_prefixes = ["E06", "E07", "E08", "E09", "W06", "S12", "N09"]
+drawn_by = ["Parliament and devolved legislatures (local government structure orders)"]
+valid_from = "2024-07-04"
+source = "wd24_pcon24_lad24_lookup"
+profiles = ["commons"]
+
 # Planned (not yet ingested): declare source and vintage when the loader lands.
-# LAD20240704   local authorities as at the GE2024 polling day (G3)
 # OA2021EW      ONS output areas, Census 2021 (MRP frame, England and Wales)
 # DZ2022S       NRS data zones, Scotland's Census 2022 (MRP frame, Scotland)
 # DZ2021NI      NISRA data zones, Census 2021 (MRP frame, Northern Ireland)

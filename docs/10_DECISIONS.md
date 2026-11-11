@@ -305,3 +305,7 @@ UK geography is a mosaic with no common nesting. Westminster constituencies are 
 - G3 is reproducible but describes councils as they were in July 2024. Later reorganisations are a known limitation, stated wherever G3 appears.
 - The MRP frame needs three nation-specific census-to-constituency fits, each recorded with its relationship type.
 - Adding any new layer (Holyrood 2026, Senedd 2026, council wards, police force areas) starts with a register entry.
+
+### Amendment (2026-11-11): `partial` links
+
+The ONS ward → constituency lookup (July 2024) flags 388 wards as split between constituencies but publishes no shares. Such links are recorded as `relation = 'partial'` with `share` NULL: an official statement that part of the area lies in the target, nothing more. A share may be added later only as a separate, derived `area_weighted` or `best_fit_population` link. No share is ever guessed.

@@ -11,7 +11,7 @@ from pathlib import Path
 
 from vsm_py import __version__
 
-from . import IngestError, commons
+from . import IngestError, commons, lookups
 from .fetch import ensure, sha256_file
 from .parties import Registry
 from .register import load_register, write_register
@@ -19,7 +19,7 @@ from .schema import connect
 from .sources import load_sources
 
 
-def record_only(conn, source, path, sha256, registry, layer=None) -> int:
+def record_only(conn, source, path, sha256, registry, layer=None, layers=None) -> int:
     """Fetch and verify only; the file is read by a later stage (e.g. geography)."""
     with conn:
         conn.execute(
@@ -29,7 +29,11 @@ def record_only(conn, source, path, sha256, registry, layer=None) -> int:
     return 0
 
 
-LOADERS = {"commons_candidacies": commons.load, "boundaries": record_only}
+LOADERS = {
+    "commons_candidacies": commons.load,
+    "boundaries": record_only,
+    "ons_wd_pcon_lad_lookup": lookups.load_wd_pcon_lad,
+}
 
 
 def version_info() -> dict[str, str]:
@@ -64,8 +68,11 @@ def run(data_dir: Path, db: Path, only: set[str] | None) -> int:
             if only and s.id not in only:
                 continue
             path = ensure(s, data_dir)
-            n = LOADERS[s.loader](conn, s, path, sha256_file(path), registry, layers.get(s.layer or ""))
-            print(f"{s.id}: {n} contests -> {db}" if s.loader != "boundaries" else f"{s.id}: verified {path}")
+            n = LOADERS[s.loader](
+                conn, s, path, sha256_file(path), registry, layers.get(s.layer or ""), layers
+            )
+            unit = {"commons_candidacies": "contests", "ons_wd_pcon_lad_lookup": "wards"}.get(s.loader)
+            print(f"{s.id}: {n} {unit} -> {db}" if unit else f"{s.id}: verified {path}")
     finally:
         conn.close()
     return 0

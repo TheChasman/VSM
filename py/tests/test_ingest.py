@@ -11,7 +11,7 @@ from vsm_py.ingest import IngestError, commons
 from vsm_py.ingest.cli import main, version_info
 from vsm_py.ingest.fetch import ensure
 from vsm_py.ingest.parties import Registry
-from vsm_py.ingest.register import load_register
+from vsm_py.ingest.register import load_register, write_register
 from vsm_py.ingest.schema import connect
 from vsm_py.ingest.sources import Source, load_sources
 
@@ -246,3 +246,93 @@ def test_version_json(monkeypatch):
     monkeypatch.setenv("VSM_ENV", "dev")
     info = version_info()
     assert info["version"] == "0.1.0" and info["environment"] == "dev" and info["commit"]
+
+
+# --- ONS ward lookup ----------------------------------------------------------------------
+
+LOOKUP_HEADER = "WD24CD,WD24NM,PCON24CD,PCON24NM,LAD24CD,LAD24NM,SPLIT_WARD\n"
+LOOKUP_LAYERS = """
+[[layer]]
+id = "PCON2024"
+description = "c"
+gss_prefixes = ["E14"]
+drawn_by = ["BCE"]
+valid_from = "2024-05-31"
+source = "lu"
+
+[[layer]]
+id = "WD20240704"
+description = "w"
+gss_prefixes = ["E05"]
+drawn_by = ["LGBCE"]
+valid_from = "2024-07-04"
+source = "lu"
+
+[[layer]]
+id = "LAD20240704"
+description = "l"
+gss_prefixes = ["E06", "E07"]
+drawn_by = ["Parliament"]
+valid_from = "2024-07-04"
+source = "lu"
+"""
+
+
+def _lookup(tmp_path, body: str):
+    from vsm_py.ingest import lookups
+
+    (tmp_path / "geographies.toml").write_text(LOOKUP_LAYERS)
+    src = source(id="lu", loader="ons_wd_pcon_lad_lookup", layer="WD20240704")
+    layers = load_register(tmp_path / "geographies.toml", [src])
+    path = tmp_path / "lu.csv"
+    path.write_text(LOOKUP_HEADER + body)
+    conn = connect(tmp_path / "ref.sqlite")
+    write_register(conn, layers)
+    n = lookups.load_wd_pcon_lad(conn, src, path, "x", None, layers["WD20240704"], layers)
+    return n, conn
+
+
+def test_lookup_links_exact_and_partial(tmp_path):
+    n, conn = _lookup(
+        tmp_path,
+        "E05000001,A,E14000001,P1,E07000001,L1,\n"
+        "E05000002,B,E14000001,P1,E07000001,L1,Yes\n"
+        "E05000002,B,E14000002,P2,E07000001,L1,Yes\n",
+    )
+    assert n == 2
+    rows = conn.execute(
+        "SELECT from_code, to_code, relation, share FROM geography_link"
+        " WHERE to_layer = 'PCON2024' ORDER BY 1, 2"
+    ).fetchall()
+    assert rows == [
+        ("E05000001", "E14000001", "exact", 1.0),
+        ("E05000002", "E14000001", "partial", None),
+        ("E05000002", "E14000002", "partial", None),
+    ]
+    assert (
+        conn.execute("SELECT COUNT(*) FROM geography_link WHERE to_layer = 'LAD20240704'").fetchone()[0] == 2
+    )
+
+
+def test_lookup_flagged_lone_ward_is_partial_not_exact(tmp_path, capsys):
+    _, conn = _lookup(tmp_path, "E05000003,C,E14000001,P1,E07000001,L1,TRUE\n")
+    assert conn.execute("SELECT relation FROM geography_link WHERE to_layer = 'PCON2024'").fetchone() == (
+        "partial",
+    )
+    assert "E05000003 flagged split" in capsys.readouterr().err
+
+
+def test_lookup_unflagged_split_and_cross_authority_wards_stop(tmp_path):
+    with pytest.raises(IngestError, match="not flagged split"):
+        _lookup(tmp_path, "E05000004,D,E14000001,P1,E07000001,L1,\nE05000004,D,E14000002,P2,E07000001,L1,\n")
+    with pytest.raises(IngestError, match="more than one local authority"):
+        _lookup(tmp_path, "E05000005,E,E14000001,P1,E07000001,L1,\nE05000005,E,E14000001,P1,E06000001,L2,\n")
+
+
+def test_partial_links_cannot_carry_a_share(tmp_path):
+    conn = connect(tmp_path / "ref.sqlite")
+    conn.execute("INSERT INTO geography_layer VALUES ('A', 'a', '[]', '[]', '2024-01-01', NULL, 's')")
+    with pytest.raises(sqlite3.IntegrityError):
+        conn.execute("INSERT INTO geography_link VALUES ('A', 'x', 'A', 'y', 'partial', 0.5, 0)")
+    with pytest.raises(sqlite3.IntegrityError):
+        conn.execute("INSERT INTO geography_link VALUES ('A', 'x', 'A', 'y', 'exact', NULL, 0)")
