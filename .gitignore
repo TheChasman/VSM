@@ -1,0 +1,5 @@
+.DS_Store
+# Agent-protocol plan worktrees
+.worktrees/
+# macOS Finder folder icon only (root) — bare Icon? matches icon.png
+/Icon?
