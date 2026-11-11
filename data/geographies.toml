@@ -1,0 +1,20 @@
+# Geography register (ADR-0014). Every area type the project uses, with its vintage.
+# Identity is GSS code + vintage; names are display only. Add a layer here before using it.
+
+[[layer]]
+id = "PCON2024"
+description = "Westminster parliamentary constituencies, 2023 review"
+gss_prefixes = ["E14", "S14", "W07", "N05"]
+drawn_by = ["Boundary Commission for England", "Boundary Commission for Scotland", "Boundary Commission for Wales", "Boundary Commission for Northern Ireland"]
+valid_from = "2024-05-31"
+source = "pcon2024_boundaries"
+profiles = ["commons"]
+
+# Planned (not yet ingested): declare source and vintage when the loader lands.
+# LAD20240704   local authorities as at the GE2024 polling day (G3)
+# OA2021EW      ONS output areas, Census 2021 (MRP frame, England and Wales)
+# DZ2022S       NRS data zones, Scotland's Census 2022 (MRP frame, Scotland)
+# DZ2021NI      NISRA data zones, Census 2021 (MRP frame, Northern Ireland)
+# SPC2026, SPR2026  Holyrood constituencies and regions (2026 review)
+# SENC2026      Senedd 2026 constituencies (16 pairs of Westminster seats)
+# WARD2022S     Scottish council wards used at the 2022 elections (STV golden tests)

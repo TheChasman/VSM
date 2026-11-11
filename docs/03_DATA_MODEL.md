@@ -103,6 +103,35 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | invalid_votes | INTEGER | yes | |
 | declared_at | TEXT | yes | Declaration time where the source gives one (candidate source for sub-metric I2) |
 
+#### geography_layer
+
+- **Purpose**: The geography register (ADR-0014). One row per area type and vintage the project uses. Mirrors `data/geographies.toml`.
+- **Primary key**: `layer_id` (e.g. `PCON2024`, `LAD20240704`, `OA2021EW`)
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| layer_id | TEXT | no | |
+| gss_prefixes | TEXT | no | JSON array of entity prefixes, e.g. `["E14","S14","W07","N05"]` |
+| drawn_by | TEXT | no | e.g. `BCE, BCS, BCW, BCNI` |
+| valid_from | TEXT | no | ISO 8601 |
+| valid_to | TEXT | yes | NULL while current |
+| source_id | TEXT | no | FK to `source` |
+
+#### geography_link
+
+- **Purpose**: A cross-layer relationship (ADR-0014). Official lookups first; spatial overlays only where none exists.
+- **Primary key**: `(from_layer, from_code, to_layer, to_code)`
+- **Owner**: ingest (official lookups) and geography (overlays)
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| from_layer, to_layer | TEXT | no | FK to `geography_layer` |
+| from_code, to_code | TEXT | no | GSS codes |
+| relation | TEXT | no | `exact`, `best_fit_population` or `area_weighted` |
+| share | REAL | no | 1.0 for `exact`; otherwise the share of `from_code` assigned to `to_code` |
+| derived | INTEGER | no | 1 when computed by VSM rather than taken from an official lookup |
+
 #### candidate_result
 
 - **Purpose**: Observed result per candidate per contest.

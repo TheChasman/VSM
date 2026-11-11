@@ -278,3 +278,30 @@ Publish `ballot_profile` (constituency-level weighted rankings per posterior dra
 - Most of the pipeline remains fully checkable by anyone.
 - Profiles are a step removed from raw data, which critics may attack. The calibration report must be thorough.
 - If the BES terms forbid even aggregates, S1 reproducibility drops to "BES-registered users only", and this ADR is superseded.
+
+---
+
+## ADR-0014: Geography register: GSS codes, frozen vintages and typed relationships
+
+- **Date**: 2026-11-11
+- **Status**: Accepted
+
+### Context
+
+UK geography is a mosaic with no common nesting. Westminster constituencies are drawn by four boundary commissions (England, Scotland, Wales, Northern Ireland). Devolved seats, council wards and electoral divisions are drawn by further bodies, and statistical geographies come from three census agencies (ONS for England and Wales 2021, NRS for Scotland 2022, NISRA for Northern Ireland 2021). Every layer has vintages, and English local government reorganisation keeps moving council boundaries. Postcodes nest in nothing. Joining layers by name, or mixing vintages silently, would corrupt the MRP post-stratification frame and sub-metric G3 without any visible error.
+
+### Decision
+
+1. **Identity is GSS code plus vintage.** No join by name anywhere. Names are display data only.
+2. **Geography register.** Every area type the project uses is declared in `data/geographies.toml` and the `geography_layer` table: layer ID, GSS entity prefixes, drawing body, vintage (valid from and to), source and licence.
+3. **Typed relationships.** Every cross-layer link is `exact` (nests), `best_fit_population` (built from census output areas or data zones) or `area_weighted` (split by land area). Each derived value records the relationship type it rests on.
+4. **Official lookups first.** Use ONS, NRS and NISRA published lookups. Compute a spatial overlay only where no official lookup exists, and mark the result as derived.
+5. **One frozen vintage per profile.** The spec fixes each profile's layers. For the Commons profile: constituencies PCON 2024; local authorities **as at the GE2024 polling day (2024-07-04)** for G3; census England and Wales 2021, Scotland 2022, Northern Ireland 2021 for MRP.
+6. **Each contest counts on its own boundaries.** Devolved and council golden tests use their own layer and vintage. No mapping to constituencies is needed to count them.
+7. **Postcodes are out of the pipeline.** If the site ever offers "find my constituency", it uses the ONS postcode directory's best fit and labels it as approximate.
+
+### Consequences
+
+- G3 is reproducible but describes councils as they were in July 2024. Later reorganisations are a known limitation, stated wherever G3 appears.
+- The MRP frame needs three nation-specific census-to-constituency fits, each recorded with its relationship type.
+- Adding any new layer (Holyrood 2026, Senedd 2026, council wards, police force areas) starts with a register entry.
