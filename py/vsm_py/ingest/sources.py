@@ -8,7 +8,8 @@ from pathlib import Path
 
 from . import IngestError
 
-LOADERS = {"commons_candidacies"}
+# "boundaries" sources are fetched and verified here, then read by the geography stage.
+LOADERS = {"commons_candidacies", "boundaries"}
 
 
 @dataclass(frozen=True)

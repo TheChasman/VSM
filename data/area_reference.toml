@@ -1,0 +1,7 @@
+# Reference areas for test seats: warn above 1 %, fail above 5 % (05_COMPONENTS.md, geography).
+
+# The largest real seat, quoted in research/additional-research.md (G2 note).
+[[seat]]
+gss_code = "S14000069"
+name = "Caithness, Sutherland and Easter Ross"
+area_km2 = 11632.0

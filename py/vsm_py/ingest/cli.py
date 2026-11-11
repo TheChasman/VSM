@@ -17,7 +17,18 @@ from .parties import Registry
 from .schema import connect
 from .sources import load_sources
 
-LOADERS = {"commons_candidacies": commons.load}
+
+def record_only(conn, source, path, sha256, registry) -> int:
+    """Fetch and verify only; the file is read by a later stage (e.g. geography)."""
+    with conn:
+        conn.execute(
+            "INSERT OR REPLACE INTO source VALUES (?, ?, ?, ?, datetime('now'), ?)",
+            (source.id, source.url, source.licence, sha256, int(source.redistributable)),
+        )
+    return 0
+
+
+LOADERS = {"commons_candidacies": commons.load, "boundaries": record_only}
 
 
 def version_info() -> dict[str, str]:
@@ -51,7 +62,7 @@ def run(data_dir: Path, db: Path, only: set[str] | None) -> int:
                 continue
             path = ensure(s, data_dir)
             n = LOADERS[s.loader](conn, s, path, sha256_file(path), registry)
-            print(f"{s.id}: {n} contests -> {db}")
+            print(f"{s.id}: {n} contests -> {db}" if s.loader != "boundaries" else f"{s.id}: verified {path}")
     finally:
         conn.close()
     return 0

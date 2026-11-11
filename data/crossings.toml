@@ -1,0 +1,60 @@
+# Declared links between constituencies with no shared land boundary (05_COMPONENTS.md, geography).
+# One entry per main scheduled ferry route or bridge, anchored at the constituency holding each
+# mainland terminal (located against the ONS July 2024 boundaries). These shape which district
+# plans are valid, so treat this list as a methodology input: confirm it before spec freeze.
+
+[[crossing]]
+a = "S14000051"
+a_name = "Orkney and Shetland"
+b = "S14000069"
+b_name = "Caithness, Sutherland and Easter Ross"
+via = "Ferry: Stromness–Scrabster"
+
+[[crossing]]
+a = "S14000051"
+a_name = "Orkney and Shetland"
+b = "S14000061"
+b_name = "Aberdeen South"
+via = "Ferry: Lerwick and Kirkwall–Aberdeen"
+
+[[crossing]]
+a = "S14000027"
+a_name = "Na h-Eileanan an Iar"
+b = "S14000069"
+b_name = "Caithness, Sutherland and Easter Ross"
+via = "Ferry: Stornoway–Ullapool"
+
+[[crossing]]
+a = "S14000027"
+a_name = "Na h-Eileanan an Iar"
+b = "S14000094"
+b_name = "Inverness, Skye and West Ross-shire"
+via = "Ferry: Tarbert and Lochmaddy–Uig (Skye)"
+
+[[crossing]]
+a = "W07000112"
+a_name = "Ynys Môn"
+b = "W07000083"
+b_name = "Bangor Aberconwy"
+via = "Bridges: Menai Suspension Bridge and Britannia Bridge"
+
+[[crossing]]
+a = "E14001303"
+a_name = "Isle of Wight East"
+b = "E14001432"
+b_name = "Portsmouth South"
+via = "Ferry: Fishbourne and Ryde–Portsmouth"
+
+[[crossing]]
+a = "E14001304"
+a_name = "Isle of Wight West"
+b = "E14001374"
+b_name = "New Forest West"
+via = "Ferry: Yarmouth–Lymington"
+
+[[crossing]]
+a = "E14001304"
+a_name = "Isle of Wight West"
+b = "E14001499"
+b_name = "Southampton Itchen"
+via = "Ferry: Cowes–Southampton"

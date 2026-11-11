@@ -4,10 +4,16 @@ version = "0.1.0"
 description = "Python stages (ingest, geography, preferences) for Voting System Metrics"
 license = "MIT OR Apache-2.0"
 requires-python = ">=3.12"
-dependencies = ["httpx>=0.27"]
+dependencies = [
+    "geopandas>=1.2.0",
+    "httpx>=0.27",
+    "pyproj>=3.8.0",
+    "shapely>=2.2.0",
+]
 
 [project.scripts]
 vsm-ingest = "vsm_py.ingest.cli:main"
+vsm-geography = "vsm_py.geography.cli:main"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]

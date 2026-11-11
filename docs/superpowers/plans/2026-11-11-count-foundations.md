@@ -40,3 +40,12 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 - Source is electionresults.parliament.uk (Open Parliament Licence), not the Commons Library briefing CSVs: the briefing site serves a Cloudflare browser challenge to scripted downloads.
 - `httpx` and the standard `csv` module only. `polars` is unnecessary at 4,500 rows; add it when a source needs it.
 - New `contest` table (per-election electorate, valid and invalid votes, declaration time). `constituency.area_km2` is nullable until `geography` runs.
+
+## Slice 5: geography (areas and contiguity)
+
+13. **`vsm-geography`** (`py/vsm_py/geography/`). Reads the verified boundary source, writes `constituency.area_km2` (BNG; NI in Irish Grid) and `adjacency` (land edges where the shared boundary is longer than zero, plus `data/crossings.toml`). Fails unless Great Britain and Northern Ireland are each one connected graph, and checks areas against `data/area_reference.toml` (warn above 1 %, fail above 5 %).
+
+**Deviations recorded:**
+- Boundaries come from the ONS July 2024 UK BFC file, not OS Boundary-Line: it covers Northern Ireland as well, under the same licence. Queried as one GeoJSON (235 MB, about 10 minutes); a repeated query returned identical bytes, so the checksum pins.
+- `la_overlap` (G3) is deferred: the coterminosity rule (area or electors) is an open methodology question and needs local-authority boundaries.
+- Eight crossings are declared for the four island groups; this list is a methodology input to confirm before freeze.

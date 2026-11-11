@@ -18,7 +18,8 @@ Each source in `data/sources.toml` needs an entry here before its files ship in 
 |---|---|---|---|
 | UK Parliament election results (electionresults.parliament.uk): GE2024 and notional GE2019 | Open Parliament Licence v3.0 (OPL) | Contains Parliamentary information licensed under the Open Parliament Licence v3.0 | Yes |
 | Office for National Statistics (ONS) electorate statistics | OGL v3.0 | <!-- TODO --> | Yes |
-| Ordnance Survey (OS) Boundary-Line | OGL v3.0 | <!-- TODO: OS copyright and database right statement --> | Yes |
+| ONS Westminster Parliamentary Constituencies (July 2024) Boundaries UK BFC | OGL v3.0 | Source: Office for National Statistics licensed under the Open Government Licence v3.0. Contains OS data © Crown copyright and database right 2024 | Yes |
+| Ordnance Survey (OS) Boundary-Line | OGL v3.0 | <!-- TODO: OS copyright and database right statement --> | Yes (not yet used) |
 | Senedd results | OGL v3.0 | <!-- TODO --> | Yes |
 | Scottish council ballot collections | <!-- TODO: confirm --> | <!-- TODO --> | Only if the licence allows |
 | 2024 constituency hex layout | <!-- TODO: confirm (Q-H2) --> | <!-- TODO --> | Only if the licence allows |

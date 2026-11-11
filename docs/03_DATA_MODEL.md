@@ -63,6 +63,8 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 |-------|------|----------|-------|
 | gss_a, gss_b | TEXT | no | FK to constituency |
 | kind | TEXT | no | `land` or `declared_crossing` (for example island seats) |
+| shared_m | REAL | yes | Shared boundary length in metres (`land` edges) |
+| note | TEXT | yes | The route, for `declared_crossing` edges (from `data/crossings.toml`) |
 
 #### la_overlap
 
