@@ -1,0 +1,16 @@
+[package]
+name = "vsm-cli"
+description = "Voting System Metrics command-line pipeline"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "vsm"
+path = "src/main.rs"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

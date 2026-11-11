@@ -5,3 +5,5 @@
 /Icon?
 # Licensed survey data (BES respondent-level): never commit
 data/private/
+# Rust build output
+/target/
