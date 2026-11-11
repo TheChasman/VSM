@@ -1,62 +1,45 @@
-<!-- AGENT-PROTOCOL:START -->
-Read the canonical global workflow at `~/Projects/agent-protocol/protocol/AGENT_WORKFLOW.md`
-before planning, coding, reviewing, merging, pushing, or cleaning this project.
-<!-- AGENT-PROTOCOL:END -->
-
 # CLAUDE.md
 
-Behavioural guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
+Claude-specific guidance for this project. Universal agent instructions live in [AGENTS.md](AGENTS.md). Read that first: the rules below are additions, not replacements.
 
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgement.
+## Project shorthand
 
-## 1. Think Before Coding
+- **Name**: Voting System Metrics (VSM)
+- **Stack**: Rust, Python (`uv`), SQLite, SvelteKit static site
+- **Specs entry point**: [`docs/00_INDEX.md`](docs/00_INDEX.md)
+- **Methodology entry point**: [`research/new-metrics.md`](research/new-metrics.md), plus its addenda `weight-profiles.md`, `international-evidence.md` and `additional-research.md`
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+## Working style
 
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+<!-- TODO: the maintainer to confirm or replace. Drafted from known preferences: -->
 
-## 2. Simplicity First
+- UK English throughout. Introduce abbreviations in brackets at first use.
+- Choose the best tool for the problem and let each proposal justify itself against alternatives. The stack preference (Rust, Svelte, SQLite) is a default, not a rule.
+- Do not treat popularity as evidence of merit when recommending libraries or methods.
+- Keep documents in manageable pieces. Do not produce single files of 1,000+ lines.
 
-**Minimum code that solves the problem. Nothing speculative.**
+## Project-specific context Claude tends to need
 
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
+- **The project exists to be neutral.** It replaces the Electoral Reform Society (ERS) star ratings, which favour the system the ERS campaigns for. Never write copy, defaults or examples that favour a voting system. No "overall winner" is published by default (principle P8).
+- **Primary target is the Commons profile** (C01–C11). Devolved, council and executive profiles are mainly evidence that raises Commons grades.
+- **Evidence grades matter as much as scores.** A, B, B-int, C. Stars are always shown with the grade.
+- **S0 is a lower bound.** Static re-runs carry First Past the Post (FPTP) tactical voting into the baseline. Say so wherever S0 results appear.
+- **The research documents also live in a claude.ai Project** ("PROJ: Voting System Metrics"). Keep `research/` in the repository in sync with it; the Project copy is the working draft until the spec is frozen.
+- Machines: the M1 MacBook Pro ("Kirk") is the daily driver and runs the pipeline; the 2015 MacBook Pro ("SpocksPad") is the lid-down server, available for long S1 batches.
 
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+## Tools and integrations on this project
 
-## 3. Surgical Changes
+<!-- TODO: list MCP servers and CLIs used when working on this repository (for example the Svelte MCP server for SvelteKit documentation, context7 for library docs). -->
 
-**Touch only what you must. Clean up only your own mess.**
+## Things Claude has got wrong before
 
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
+Errors corrected during research, worth not repeating:
 
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
+- Scottish council Single Transferable Vote (STV) wards are **not** "3–4 members". The 2022 pattern is 355 wards of 1–5 members.
+- Wrong-winner reference cases are **1929**, 1951 and February 1974, not only the last two.
+- Senedd 2026 is **not** modelled: the election took place on 2026-05-07 (16 six-member districts, closed lists, D'Hondt), so C09 is grade A for the devolved profile.
+- Mayors and Police and Crime Commissioners (PCCs) changed system twice: Supplementary Vote (SV) to 2021, FPTP 2024–2026, SV restored from 2027. Do not describe either as "the" current system without a date.
+- Binary criteria compliance (sub-metric S1) rewards count rules that ignore most of the ballot. Do not present S1 alone as "tactical-voting resistance"; S2 is the main measure.
 
 ## Secrets Management
 
