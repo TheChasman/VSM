@@ -14,11 +14,12 @@ from vsm_py import __version__
 from . import IngestError, commons
 from .fetch import ensure, sha256_file
 from .parties import Registry
+from .register import load_register, write_register
 from .schema import connect
 from .sources import load_sources
 
 
-def record_only(conn, source, path, sha256, registry) -> int:
+def record_only(conn, source, path, sha256, registry, layer=None) -> int:
     """Fetch and verify only; the file is read by a later stage (e.g. geography)."""
     with conn:
         conn.execute(
@@ -55,13 +56,15 @@ def run(data_dir: Path, db: Path, only: set[str] | None) -> int:
     unknown = (only or set()) - {s.id for s in sources}
     if unknown:
         raise IngestError(f"unknown source ids: {sorted(unknown)}")
+    layers = load_register(data_dir / "geographies.toml", sources)
     conn = connect(db)
     try:
+        write_register(conn, layers)
         for s in sources:
             if only and s.id not in only:
                 continue
             path = ensure(s, data_dir)
-            n = LOADERS[s.loader](conn, s, path, sha256_file(path), registry)
+            n = LOADERS[s.loader](conn, s, path, sha256_file(path), registry, layers.get(s.layer or ""))
             print(f"{s.id}: {n} contests -> {db}" if s.loader != "boundaries" else f"{s.id}: verified {path}")
     finally:
         conn.close()

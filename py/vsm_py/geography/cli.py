@@ -9,8 +9,10 @@ import sqlite3
 import sys
 from pathlib import Path
 
+from vsm_py.ingest import IngestError
 from vsm_py.ingest.cli import version_info
 from vsm_py.ingest.fetch import ensure
+from vsm_py.ingest.register import check_codes, load_register
 from vsm_py.ingest.sources import load_sources
 
 from . import GeographyError
@@ -32,10 +34,16 @@ CREATE TABLE IF NOT EXISTS adjacency (
 
 
 def run(data_dir: Path, db: Path) -> int:
-    source = next((s for s in load_sources(data_dir / "sources.toml") if s.id == BOUNDARY_SOURCE), None)
+    sources = load_sources(data_dir / "sources.toml")
+    source = next((s for s in sources if s.id == BOUNDARY_SOURCE), None)
     if source is None:
         raise GeographyError(f"source {BOUNDARY_SOURCE} not in sources.toml")
-    gdf = read_boundaries(ensure(source, data_dir))
+    try:
+        layer = load_register(data_dir / "geographies.toml", sources)[source.layer]
+        gdf = read_boundaries(ensure(source, data_dir))
+        check_codes(layer, set(gdf["gss_code"]), source.id)
+    except IngestError as e:
+        raise GeographyError(str(e)) from e
     names = dict(zip(gdf["gss_code"], gdf["name"], strict=True))
 
     conn = sqlite3.connect(db)

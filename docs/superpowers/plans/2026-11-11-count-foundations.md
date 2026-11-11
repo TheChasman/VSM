@@ -49,3 +49,7 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 - Boundaries come from the ONS July 2024 UK BFC file, not OS Boundary-Line: it covers Northern Ireland as well, under the same licence. Queried as one GeoJSON (235 MB, about 10 minutes); a repeated query returned identical bytes, so the checksum pins.
 - `la_overlap` (G3) is deferred: the coterminosity rule (area or electors) is an open methodology question and needs local-authority boundaries.
 - Eight crossings are declared for the four island groups; this list is a methodology input to confirm before freeze.
+
+## Slice 6: geography register (ADR-0014)
+
+14. **Register in ingest.** `data/geographies.toml` loads into `geography_layer` on every run (`geography_link` table created, unused until the first lookup lands). Every source may name a `layer`; boundary sources must. Ingest stops if a layer is unregistered, a register entry is malformed or names an unknown source, or any GSS code in a results or boundary file falls outside its layer's prefixes. `reference.sqlite` schema version 2: rebuild with `just ingest && just geography`.

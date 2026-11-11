@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 DDL = """
 CREATE TABLE IF NOT EXISTS meta (
@@ -17,6 +17,25 @@ CREATE TABLE IF NOT EXISTS source (
   sha256 TEXT NOT NULL,
   retrieved TEXT NOT NULL,
   redistributable INTEGER NOT NULL CHECK (redistributable IN (0, 1))
+);
+CREATE TABLE IF NOT EXISTS geography_layer (
+  layer_id TEXT PRIMARY KEY,
+  description TEXT NOT NULL,
+  gss_prefixes TEXT NOT NULL,
+  drawn_by TEXT NOT NULL,
+  valid_from TEXT NOT NULL,
+  valid_to TEXT,
+  source_id TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS geography_link (
+  from_layer TEXT NOT NULL REFERENCES geography_layer(layer_id),
+  from_code TEXT NOT NULL,
+  to_layer TEXT NOT NULL REFERENCES geography_layer(layer_id),
+  to_code TEXT NOT NULL,
+  relation TEXT NOT NULL CHECK (relation IN ('exact', 'best_fit_population', 'area_weighted')),
+  share REAL NOT NULL CHECK (share > 0 AND share <= 1),
+  derived INTEGER NOT NULL CHECK (derived IN (0, 1)),
+  PRIMARY KEY (from_layer, from_code, to_layer, to_code)
 );
 CREATE TABLE IF NOT EXISTS election (
   election_id TEXT PRIMARY KEY,

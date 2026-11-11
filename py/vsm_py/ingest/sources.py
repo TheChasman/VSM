@@ -27,6 +27,8 @@ class Source:
     boundary_set: str | None = None
     # The election whose electorates define constituency.electorate.
     reference_electorate: bool = False
+    # Geography layer (data/geographies.toml) whose GSS codes this source uses.
+    layer: str | None = None
 
     def path(self, data_dir: Path) -> Path:
         base = "raw" if self.redistributable else "private"

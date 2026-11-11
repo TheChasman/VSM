@@ -13,6 +13,7 @@ redistributable = true
 election_id = "GE2024"
 office = "commons"
 boundary_set = "WM2023"
+layer = "PCON2024"
 reference_electorate = true
 
 [[source]]
@@ -26,6 +27,7 @@ redistributable = true
 election_id = "GE2019N"
 office = "commons"
 boundary_set = "WM2023"
+layer = "PCON2024"
 
 [[source]]
 id = "pcon2024_boundaries"
@@ -36,4 +38,5 @@ licence = "OGL-3.0"
 sha256 = "8c3c6dfc989afd3b86432feaaca10b71eba1bf8ef380891e5eba34dbaac92922"
 file = "ons/pcon-2024-uk-bfc.geojson"
 loader = "boundaries"
+layer = "PCON2024"
 redistributable = true

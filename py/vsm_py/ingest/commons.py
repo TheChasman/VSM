@@ -16,6 +16,7 @@ from pathlib import Path
 
 from . import IngestError
 from .parties import INDEPENDENT, SPEAKER, Registry
+from .register import check_codes
 from .sources import Source
 
 NATIONS = {"E92000001": "E", "S92000003": "S", "W92000004": "W", "N92000002": "N"}
@@ -128,11 +129,15 @@ def _bad_nation(gss: str, row: dict[str, str]) -> str:
     raise IngestError(f"{gss}: unknown country code {row['Country geographic code']!r}")
 
 
-def load(conn: sqlite3.Connection, source: Source, path: Path, sha256: str, registry: Registry) -> int:
+def load(
+    conn: sqlite3.Connection, source: Source, path: Path, sha256: str, registry: Registry, layer=None
+) -> int:
     """Write one election in a single transaction. Re-running replaces that election's rows."""
     if not (source.election_id and source.office and source.boundary_set):
         raise IngestError(f"{source.id}: commons_candidacies needs election_id, office and boundary_set")
     election, contests = parse(path, registry)
+    if layer is not None:
+        check_codes(layer, {c.gss for c in contests}, source.id)
     if source.reference_electorate:
         found = {c.name for c in contests} & PROTECTED
         if found != PROTECTED:

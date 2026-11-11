@@ -1,6 +1,7 @@
 import csv
 import hashlib
 import shutil
+import sqlite3
 from pathlib import Path
 
 import httpx
@@ -10,6 +11,7 @@ from vsm_py.ingest import IngestError, commons
 from vsm_py.ingest.cli import main, version_info
 from vsm_py.ingest.fetch import ensure
 from vsm_py.ingest.parties import Registry
+from vsm_py.ingest.register import load_register
 from vsm_py.ingest.schema import connect
 from vsm_py.ingest.sources import Source, load_sources
 
@@ -194,9 +196,50 @@ def test_cli_run_on_fixture(tmp_path, capsys, monkeypatch):
         '[[source]]\nid = "t"\nurl = "https://example.invalid"\nlicence = "OPL-3.0"\n'
         f'sha256 = "{CSV_SHA}"\nfile = "t/c.csv"\nloader = "commons_candidacies"\n'
         'redistributable = true\nelection_id = "GE2024"\noffice = "commons"\nboundary_set = "WM2023"\n'
+        'layer = "PCON2024"\n'
     )
+    (tmp_path / "geographies.toml").write_text(REGISTER)
     assert main(["run", "--data-dir", str(tmp_path)]) == 0
     assert "t: 2 contests" in capsys.readouterr().out
+    with sqlite3.connect(tmp_path / "reference.sqlite") as conn:
+        assert conn.execute("SELECT layer_id FROM geography_layer").fetchall() == [("PCON2024",)]
+
+
+def test_codes_outside_the_layer_stop_ingest(tmp_path, registry):
+    layers = load_register(_register(tmp_path, '["W07"]'), [source(layer="PCON2024")])
+    conn = connect(tmp_path / "ref.sqlite")
+    with pytest.raises(IngestError, match=r"2 codes outside layer PCON2024.*E14000001, S14000001"):
+        commons.load(conn, source(), FIX / "candidacies.csv", CSV_SHA, registry, layers["PCON2024"])
+
+
+def test_register_rejects_unregistered_layers_and_bad_entries(tmp_path):
+    reg = _register(tmp_path)
+    with pytest.raises(IngestError, match="layer LAD2024 is not in geographies.toml"):
+        load_register(reg, [source(layer="LAD2024")])
+    with pytest.raises(IngestError, match="boundary sources must name a registered layer"):
+        load_register(reg, [source(loader="boundaries")])
+    with pytest.raises(IngestError, match="source t is not in sources.toml"):
+        load_register(reg, [source(id="other")])
+    with pytest.raises(IngestError, match="must be like E14"):
+        load_register(_register(tmp_path, '["E1"]'), [source()])
+
+
+def test_register_admits_by_prefix_and_shape(tmp_path):
+    layer = load_register(_register(tmp_path), [source()])["PCON2024"]
+    assert layer.admits("E14000001") and layer.admits("S14000001")
+    assert not layer.admits("E05000001") and not layer.admits("E14")
+
+
+REGISTER = (
+    '[[layer]]\nid = "PCON2024"\ndescription = "t"\ngss_prefixes = ["E14", "S14"]\ndrawn_by = ["BCE"]\n'
+    'valid_from = "2024-05-31"\nsource = "t"\n'
+)
+
+
+def _register(tmp_path: Path, prefixes: str = '["E14", "S14"]') -> Path:
+    p = tmp_path / "geographies.toml"
+    p.write_text(REGISTER.replace('["E14", "S14"]', prefixes))
+    return p
 
 
 def test_version_json(monkeypatch):
