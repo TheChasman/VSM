@@ -23,7 +23,21 @@ fn main() {
     };
     println!("cargo:rustc-env=VSM_GIT_COMMIT={commit}");
     // Rebuild when HEAD or the index moves. Ask git for the paths: in a worktree `.git` is a file.
-    for name in ["HEAD", "index"] {
+    // HEAD is usually symbolic, so also watch the branch ref it points at (a commit moves only that).
+    let branch_ref = Command::new("git")
+        .args(["symbolic-ref", "-q", "HEAD"])
+        .output()
+        .ok()
+        .filter(|o| o.status.success())
+        .and_then(|o| String::from_utf8(o.stdout).ok())
+        .map(|s| s.trim().to_string());
+    let mut names = vec![
+        "HEAD".to_string(),
+        "index".to_string(),
+        "packed-refs".to_string(),
+    ];
+    names.extend(branch_ref);
+    for name in &names {
         if let Some(path) = Command::new("git")
             .args(["rev-parse", "--path-format=absolute", "--git-path", name])
             .output()
