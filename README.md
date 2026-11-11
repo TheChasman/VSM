@@ -59,7 +59,9 @@ Changes to frozen methodology go through a versioned changelog, not ordinary pul
 
 ## Licence
 
-Code: MIT OR Apache-2.0. Project-produced data: CC BY 4.0. Upstream data keeps its own licence; see `data/LICENCES.md`. (Proposed, ADR-0012.)
+Code is licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option. Project-produced data (scores, bundles, `runs.sqlite`) is licensed under [CC BY 4.0](LICENSE-DATA). Upstream data keeps its own licence; see [`data/LICENCES.md`](data/LICENCES.md). Decision record: ADR-0012.
+
+Unless you state otherwise, any contribution you intentionally submit for inclusion is dual licensed as above, without additional terms or conditions.
 
 ## Secrets Management
 

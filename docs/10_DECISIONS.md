@@ -243,7 +243,7 @@ No analytics scripts, no external fonts and no third-party requests. If traffic 
 ## ADR-0012: Licences: dual MIT / Apache-2.0 for code, CC BY 4.0 for derived data
 
 - **Date**: 2026-11-11
-- **Status**: Proposed
+- **Status**: Accepted
 
 ### Context
 

@@ -3,3 +3,5 @@
 .worktrees/
 # macOS Finder folder icon only (root) — bare Icon? matches icon.png
 /Icon?
+# Licensed survey data (BES respondent-level): never commit
+data/private/
