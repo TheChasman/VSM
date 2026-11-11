@@ -30,3 +30,13 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 ## Slice 3 tasks
 
 10. **`stv_wigm_droop`.** Scottish council STV (Scottish Local Government Elections Order 2007 counting rules), fixed point per ADR-0006 (accepted 2026-11-11): every value is an integer count of 10^-`decimals` units, truncated. Droop quota on whole first preferences. One surplus per stage, largest first; WIGM transfers every paper held by the elected candidate at `surplus × paper value ÷ total`, truncated per paper. No surplus left: exclude the lowest, papers move at their current value. Ties: most recent earlier stage, then the lot. Elect all continuing candidates once they equal the remaining vacancies. Hand-worked tests now; golden tests against the 2022 ward ballot files follow `ingest`.
+
+## Slice 4: ingest (Commons results) and the first golden test
+
+11. **`vsm-ingest`** (`py/vsm_py/ingest/`, `uv`). `data/sources.toml` pins URL, licence and SHA-256 per source; a file on disk is never overwritten, a mismatch or unpinned hash stops, an archived copy is used when offline, `manual` sources (BES) must be placed by hand. `data/parties.toml` registry: unmapped spellings stop ingest, all listed at once. Commons loader cross-checks each contest's candidate votes against its valid-vote count and the file's grand total, one transaction per source.
+12. **Golden test** `crates/vsm-count/tests/golden_ge2024.rs` (`just golden`): FPTP reproduces all 650 GE2024 winners and the declared seat totals.
+
+**Deviations recorded:**
+- Source is electionresults.parliament.uk (Open Parliament Licence), not the Commons Library briefing CSVs: the briefing site serves a Cloudflare browser challenge to scripted downloads.
+- `httpx` and the standard `csv` module only. `polars` is unnecessary at 4,500 rows; add it when a source needs it.
+- New `contest` table (per-election electorate, valid and invalid votes, declaration time). `constituency.area_km2` is nullable until `geography` runs.

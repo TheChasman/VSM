@@ -7,3 +7,11 @@
 data/private/
 # Rust build output
 /target/
+# Built by `just ingest`; open-licence raw files ship in release archives, not git
+data/raw/
+data/reference.sqlite
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/

@@ -1,0 +1,28 @@
+# Every input to reference.sqlite. Checksums are pinned: a changed file stops ingest
+# (05_COMPONENTS.md). Redistributable files live in data/raw/, others in data/private/.
+# Licences: see data/LICENCES.md.
+
+[[source]]
+id = "ge2024_candidacies"
+url = "https://electionresults.parliament.uk/general-elections/6/candidacies.csv"
+licence = "OPL-3.0"
+sha256 = "50e7705fb9a3946c6ecc3e1554b1bac47714ac85ed06952979975288e2e1ecae"
+file = "parliament/ge2024-candidacies.csv"
+loader = "commons_candidacies"
+redistributable = true
+election_id = "GE2024"
+office = "commons"
+boundary_set = "WM2023"
+reference_electorate = true
+
+[[source]]
+id = "ge2019n_candidacies"
+url = "https://electionresults.parliament.uk/general-elections/5/candidacies.csv"
+licence = "OPL-3.0"
+sha256 = "e8fae90cce001392388c0192446c8a2c2cd55ecabf10303354f518faca38b5de"
+file = "parliament/ge2019n-candidacies.csv"
+loader = "commons_candidacies"
+redistributable = true
+election_id = "GE2019N"
+office = "commons"
+boundary_set = "WM2023"

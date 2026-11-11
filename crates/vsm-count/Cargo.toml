@@ -9,3 +9,6 @@ rust-version.workspace = true
 
 [dependencies]
 serde.workspace = true
+
+[dev-dependencies]
+rusqlite = { version = "0.32", features = ["bundled"] }

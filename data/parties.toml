@@ -1,0 +1,516 @@
+# Project party registry. Every source spelling must map here, or ingest stops (05_COMPONENTS.md).
+# Codes are stable project identifiers. Add a spelling to `aliases`; never rename a code.
+# Generated 2026-11-11 from the GE2024 and notional GE2019 candidacies files, then maintained by hand.
+# Scottish and Northern Ireland Green parties are separate parties with their own codes.
+
+[[party]]
+code = "IND"
+name = "Independent"
+
+[[party]]
+code = "SPK"
+name = "Speaker"
+
+[[party]]
+code = "ADF"
+name = "Alliance for Democracy and Freedom"
+
+[[party]]
+code = "AGS"
+name = "Alliance for Green Socialism"
+
+[[party]]
+code = "ALBA"
+name = "Alba Party"
+
+[[party]]
+code = "ANWP"
+name = "Animal Welfare Party"
+
+[[party]]
+code = "AONT"
+name = "Aontú"
+
+[[party]]
+code = "APNI"
+name = "Alliance"
+
+[[party]]
+code = "ASH"
+name = "Ashfield Independents"
+
+[[party]]
+code = "AWA"
+name = "Abolish the Welsh Assembly Party"
+
+[[party]]
+code = "BDP"
+name = "British Democratic Party"
+
+[[party]]
+code = "BFL"
+name = "The Best for Luton Party"
+
+[[party]]
+code = "BNP"
+name = "British National Party"
+
+[[party]]
+code = "BPI"
+name = "Burnley and Padiham Independent Party"
+
+[[party]]
+code = "BR"
+name = "Blue Revolution"
+
+[[party]]
+code = "BRX"
+name = "The Brexit Party"
+
+[[party]]
+code = "BSJP"
+name = "Birkenhead Social Justice Party"
+
+[[party]]
+code = "BUP"
+name = "British Unionist Party B.U.P."
+
+[[party]]
+code = "CANDI"
+name = "Chesterfield And North Derbyshire Independents (CANDI)"
+
+[[party]]
+code = "CBP"
+name = "Count Binface Party"
+
+[[party]]
+code = "CCLA"
+name = "Cross-Community Labour Alternative"
+
+[[party]]
+code = "CFLY"
+name = "Confelicity"
+
+[[party]]
+code = "CG"
+name = "Common Good"
+
+[[party]]
+code = "CHP"
+name = "Christian Party, Proclaiming Christ's Lordship"
+
+[[party]]
+code = "CLI"
+name = "Climate Party"
+
+[[party]]
+code = "CMU"
+name = "Communities United Party"
+
+[[party]]
+code = "CMUK"
+name = "The Citizens Movement Party UK"
+
+[[party]]
+code = "CNSN"
+name = "Consensus"
+
+[[party]]
+code = "COMF"
+name = "Communist Future"
+
+[[party]]
+code = "COMM"
+name = "Communist Party of Britain"
+
+[[party]]
+code = "COMML"
+name = "Communist League Election Campaign"
+
+[[party]]
+code = "CON"
+name = "Conservative"
+
+[[party]]
+code = "CP"
+name = "The Common People"
+
+[[party]]
+code = "CPA"
+name = "Christian Peoples Alliance"
+
+[[party]]
+code = "CUMF"
+name = "Cumbria First"
+
+[[party]]
+code = "CVP"
+name = "The Cynon Valley Party"
+
+[[party]]
+code = "DFC"
+name = "Democracy for Chorley"
+
+[[party]]
+code = "DUP"
+name = "Democratic Unionist Party"
+
+[[party]]
+code = "ECP"
+name = "English Constitution Party"
+
+[[party]]
+code = "ED"
+name = "English Democrats"
+
+[[party]]
+code = "ELVIS"
+name = "Church of the Militant Elvis Party"
+
+[[party]]
+code = "FA"
+name = "Freedom Alliance"
+
+[[party]]
+code = "FVP"
+name = "Fairer Voting Party"
+
+[[party]]
+code = "GPNI"
+name = "Green Party Northern Ireland"
+
+[[party]]
+code = "GRN"
+name = "Green Party"
+
+[[party]]
+code = "GWLD"
+name = "Gwlad Gwlad"
+
+[[party]]
+code = "HI"
+name = "Hampshire Independents"
+
+[[party]]
+code = "HPUK"
+name = "Heritage Party"
+
+[[party]]
+code = "HWDI"
+name = "Heavy Woollen District Independents"
+
+[[party]]
+code = "IAK"
+name = "Independent Alliance (Kent)"
+
+[[party]]
+code = "IDD"
+name = "Independents for Direct Democracy"
+
+[[party]]
+code = "IGC"
+name = "The Independent Group for Change"
+
+[[party]]
+code = "INET"
+name = "Independent Network"
+
+[[party]]
+code = "IOA"
+name = "Independent Oxford Alliance"
+
+[[party]]
+code = "ISP"
+name = "Independence for Scotland Party"
+
+[[party]]
+code = "JACP"
+name = "The Justice & Anti-Corruption Party"
+
+[[party]]
+code = "KIRG"
+name = "Kingston Independent Residents Group"
+
+[[party]]
+code = "LAB"
+name = "Labour"
+
+[[party]]
+code = "LCI"
+name = "Liverpool Community Independents"
+
+[[party]]
+code = "LD"
+name = "Liberal Democrat"
+
+[[party]]
+code = "LIB"
+name = "Liberal"
+
+[[party]]
+code = "LNIN"
+name = "Lincolnshire Independents Lincolnshire First"
+
+[[party]]
+code = "LPUK"
+name = "Libertarian Party"
+
+[[party]]
+code = "MK"
+name = "Mebyon Kernow - The Party for Cornwall"
+
+[[party]]
+code = "MRLP"
+name = "Official Monster Raving Loony Party"
+
+[[party]]
+code = "MTHR"
+name = "Motherworld Party"
+
+[[party]]
+code = "MTW9"
+name = "The Mitre TW9"
+
+[[party]]
+code = "NEP"
+name = "The North East Party"
+
+[[party]]
+code = "NHAP"
+name = "National Health Action Party"
+
+[[party]]
+code = "NIP"
+name = "Newham Independents Party"
+
+[[party]]
+code = "NONPOL"
+name = "New Open Non-Political Organised Leadership"
+
+[[party]]
+code = "OL"
+name = "One Leicester"
+
+[[party]]
+code = "PATR"
+name = "Patria"
+
+[[party]]
+code = "PBP"
+name = "People Before Profit"
+
+[[party]]
+code = "PBPA"
+name = "People Before Profit Alliance"
+
+[[party]]
+code = "PC"
+name = "Plaid Cymru"
+
+[[party]]
+code = "PCFIRG"
+name = "Putting Crewe First, Independent Residents Group"
+
+[[party]]
+code = "PIP"
+name = "Portsmouth Independent Party"
+
+[[party]]
+code = "POS"
+name = "Proud of Oldham & Saddleworth"
+
+[[party]]
+code = "POW"
+name = "Party of Women"
+
+[[party]]
+code = "PPNV"
+name = "The Peace Party - Non-violence, Justice, Environment"
+
+[[party]]
+code = "PRO"
+name = "Propel"
+
+[[party]]
+code = "PSY"
+name = "Psychedelic Movement"
+
+[[party]]
+code = "RBD"
+name = "Rebooting Democracy"
+
+[[party]]
+code = "REF"
+name = "Reform UK"
+
+[[party]]
+code = "REN"
+name = "Renew"
+
+[[party]]
+code = "REU"
+name = "Rejoin EU"
+
+[[party]]
+code = "SCOTLIBT"
+name = "Scottish Libertarian Party"
+
+[[party]]
+code = "SDA"
+name = "South Devon Alliance"
+
+[[party]]
+code = "SDLP"
+name = "Social Democratic & Labour Party"
+
+[[party]]
+code = "SDP"
+name = "Social Democratic Party"
+
+[[party]]
+code = "SEP"
+name = "Socialist Equality Party"
+
+[[party]]
+code = "SF"
+name = "Sinn Féin"
+
+[[party]]
+code = "SFAN"
+name = "Stockport Fights Austerity No To Cuts"
+
+[[party]]
+code = "SFP"
+name = "Scottish Family Party"
+
+[[party]]
+code = "SG"
+name = "Shared Ground"
+
+[[party]]
+code = "SGP"
+name = "Scottish Green Party"
+
+[[party]]
+code = "SHRP"
+name = "Shropshire Party"
+
+[[party]]
+code = "SI"
+name = "Swale Independents"
+
+[[party]]
+code = "SJ"
+name = "Social Justice party"
+
+[[party]]
+code = "SL"
+name = "Socialist Labour Party"
+
+[[party]]
+code = "SNAV"
+name = "Space Navies Party"
+
+[[party]]
+code = "SNP"
+name = "Scottish National Party"
+
+[[party]]
+code = "SPGB"
+name = "The Socialist Party of Great Britain"
+
+[[party]]
+code = "SSP"
+name = "Scottish Socialist Party"
+
+[[party]]
+code = "SUN"
+name = "Save Us Now"
+
+[[party]]
+code = "SVR"
+name = "Sovereignty"
+
+[[party]]
+code = "TCRP"
+name = "The Constitution and Reform Party"
+
+[[party]]
+code = "TFB"
+name = "True & Fair Party"
+
+[[party]]
+code = "TI"
+name = "Taking The Initiative Party"
+
+[[party]]
+code = "TLW"
+name = "Touch Love Worldwide (UK)"
+
+[[party]]
+code = "TRANSFORM"
+name = "Transform Party"
+
+[[party]]
+code = "TUSC"
+name = "Trade Unionist and Socialist Coalition"
+
+[[party]]
+code = "TUV"
+name = "Traditional Unionist Voice"
+
+[[party]]
+code = "UGP"
+name = "The Universal Good Party"
+
+[[party]]
+code = "UKIP"
+name = "UK Independence Party"
+
+[[party]]
+code = "UKV"
+name = "UK Voice"
+
+[[party]]
+code = "UUP"
+name = "Ulster Unionist Party"
+
+[[party]]
+code = "VPP"
+name = "Veterans and People's Party"
+
+[[party]]
+code = "VUK"
+name = "Volt United Kingdom"
+
+[[party]]
+code = "WEP"
+name = "Women's Equality Party"
+
+[[party]]
+code = "WPB"
+name = "Workers Party of Britain"
+
+[[party]]
+code = "WRP"
+name = "Workers Revolutionary Party"
+
+[[party]]
+code = "WY"
+name = "Wycombe Independents"
+
+[[party]]
+code = "YESH"
+name = "Yeshua"
+
+[[party]]
+code = "YPP"
+name = "Young People's Party"
+
+[[party]]
+code = "YPUK"
+name = "The Yoruba Party in the UK"
+
+[[party]]
+code = "YRKS"
+name = "The Yorkshire Party"

@@ -16,7 +16,7 @@ Each source in `data/sources.toml` needs an entry here before its files ship in 
 
 | Source | Licence | Attribution | Redistributed |
 |---|---|---|---|
-| House of Commons Library election results | Open Government Licence v3.0 (OGL) | <!-- TODO: exact attribution statement --> | Yes |
+| UK Parliament election results (electionresults.parliament.uk): GE2024 and notional GE2019 | Open Parliament Licence v3.0 (OPL) | Contains Parliamentary information licensed under the Open Parliament Licence v3.0 | Yes |
 | Office for National Statistics (ONS) electorate statistics | OGL v3.0 | <!-- TODO --> | Yes |
 | Ordnance Survey (OS) Boundary-Line | OGL v3.0 | <!-- TODO: OS copyright and database right statement --> | Yes |
 | Senedd results | OGL v3.0 | <!-- TODO --> | Yes |

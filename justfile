@@ -18,3 +18,20 @@ check: lint test
 # The hook runs the global SpockLock hook first, so secret scanning still applies.
 hooks:
     git config core.hooksPath scripts/hooks
+
+# Python stages
+py-lint:
+    cd py && uv run ruff format --check . && uv run ruff check .
+
+py-test:
+    cd py && uv run pytest -q
+
+# Fetch, verify and load every source into data/reference.sqlite.
+ingest:
+    uv run --project py vsm-ingest run --data-dir data
+
+# Golden tests against real results (needs `just ingest`).
+golden:
+    cargo test --workspace -- --ignored
+
+all: check py-lint py-test

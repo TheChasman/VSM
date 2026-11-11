@@ -40,7 +40,7 @@ No secret is needed to run the pipeline or build the site.
 
 | Tier | Data | Handling |
 |------|------|----------|
-| Public, open licence | Commons Library results, Office for National Statistics (ONS) electorates, Ordnance Survey (OS) Boundary-Line, Senedd results (Open Government Licence (OGL)) | Republished with attribution in the release archive |
+| Public, open licence | UK Parliament election results (Open Parliament Licence), Commons Library results, Office for National Statistics (ONS) electorates, Ordnance Survey (OS) Boundary-Line, Senedd results (Open Government Licence (OGL)) | Republished with attribution in the release archive |
 | Public, other licence | Scottish council ballot collections, hex layouts, Chapel Hill Expert Survey (CHES) and BES expert-survey party positions | Republished only if the licence allows; otherwise fetched at build time. <!-- TODO: confirm each licence --> |
 | **Restricted** | British Election Study (BES) respondent-level panel data | **Personal data under UK GDPR, although pseudonymised.** Kept only in `data/private/`. Never committed, never in a release, never in logs. Used only under the BES terms of use |
 | Derived aggregate | `ballot_profile` (weighted rankings per constituency and draw) | Published, **subject to confirming** that the BES terms permit derived aggregates (open question Q-S1). Small-cell rule: no ranking row whose weight rests on fewer than <!-- TODO: minimum respondents --> respondents is published; such rows are pooled |

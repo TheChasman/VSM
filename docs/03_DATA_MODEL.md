@@ -50,7 +50,7 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | region | TEXT | yes | English region or nation |
 | county | TEXT | yes | Ceremonial county, used to keep districts together |
 | electorate | INTEGER | no | Registered electors at the reference date |
-| area_km2 | REAL | no | From OS Boundary-Line |
+| area_km2 | REAL | yes | From OS Boundary-Line. NULL until `geography` runs; `geography` fails if any remain NULL |
 | protected | INTEGER | no | 1 for the five protected seats |
 
 #### adjacency
@@ -85,6 +85,21 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | party_code | TEXT | no | e.g. `LAB`, `CON`, `LD`, `REF`, `GRN`, `SNP`, `PC` |
 | name | TEXT | no | |
 | aliases | TEXT | yes | JSON array of source spellings |
+
+#### contest
+
+- **Purpose**: One constituency contest in one election: the totals each `candidate_result` set must add up to.
+- **Primary key**: `(election_id, gss_code)`
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| election_id | TEXT | no | |
+| gss_code | TEXT | no | |
+| electorate | INTEGER | no | Electorate for this election (`constituency.electorate` is the reference election's) |
+| valid_votes | INTEGER | no | Ingest stops unless candidate votes sum to this |
+| invalid_votes | INTEGER | yes | |
+| declared_at | TEXT | yes | Declaration time where the source gives one (candidate source for sub-metric I2) |
 
 #### candidate_result
 

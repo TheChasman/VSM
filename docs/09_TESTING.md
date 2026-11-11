@@ -24,7 +24,7 @@ A missing test in the `count` or `metrics` crates is a real gap. A missing snaps
 
 | Test | Expected result | Source |
 |------|-----------------|--------|
-| First Past the Post (FPTP) count of GE2024 by constituency | Every constituency winner and the 650-seat party totals match the Commons Library | Commons Library 2024 CSV |
+| First Past the Post (FPTP) count of GE2024 by constituency | Every constituency winner and the 650-seat party totals match the Commons Library | UK Parliament election results, GE2024 `candidacies.csv`. `just golden` |
 | Gallagher index (sub-metric P1, raw) of the actual 2024 result | Within the published range 23.6–24.0 (difference due to "Other" grouping) | `additional-research.md` §2.2 |
 | Senedd 2026 D'Hondt | All 96 seats in 16 six-member districts match the declared result | Senedd Research briefing |
 | Single Transferable Vote (STV) with Weighted Inclusive Gregory Method (WIGM): Scottish council wards from the 2022 ballot files | Elected sets match the official declarations, and stage totals match within declared rounding | Scottish council ballot collections |

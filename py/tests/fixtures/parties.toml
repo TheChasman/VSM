@@ -1,0 +1,24 @@
+[[party]]
+code = "IND"
+name = "Independent"
+
+[[party]]
+code = "SPK"
+name = "Speaker"
+
+[[party]]
+code = "LAB"
+name = "Labour"
+
+[[party]]
+code = "CON"
+name = "Conservative"
+
+[[party]]
+code = "LD"
+name = "Liberal Democrat"
+
+[[party]]
+code = "SNP"
+name = "Scottish National Party"
+aliases = ["SNP"]

@@ -11,9 +11,12 @@ if [[ -n "${global_hooks}" && -x "${global_hooks}/pre-commit" ]]; then
   "${global_hooks}/pre-commit" "$@"
 fi
 
-if ! git diff --cached --name-only | grep -qE '\.rs$|Cargo\.(toml|lock)$'; then
-  exit 0
+staged="$(git diff --cached --name-only)"
+if grep -qE '\.rs$|Cargo\.(toml|lock)$' <<<"${staged}"; then
+  cargo fmt --all --check
+  cargo clippy --workspace --all-targets --quiet -- -D warnings
+  cargo test --workspace --quiet
 fi
-cargo fmt --all --check
-cargo clippy --workspace --all-targets --quiet -- -D warnings
-cargo test --workspace --quiet
+if grep -qE '^py/' <<<"${staged}"; then
+  (cd py && uv run -q ruff format --check . && uv run -q ruff check -q . && uv run -q pytest -q)
+fi

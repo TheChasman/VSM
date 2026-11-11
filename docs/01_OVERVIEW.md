@@ -62,7 +62,7 @@ The first release covers the Commons profile, configurations C01–C11. Devolved
 ## Assumptions
 
 - **A1.** The 2023 Westminster constituency boundaries remain the building blocks for district plans for the life of the first release.
-- **A2.** Commons Library results, Office for National Statistics (ONS) electorate statistics and Ordnance Survey (OS) Boundary-Line remain openly licensed (Open Government Licence) and downloadable.
+- **A2.** UK Parliament election results (Open Parliament Licence), Office for National Statistics (ONS) electorate statistics and Ordnance Survey (OS) Boundary-Line (Open Government Licence) remain openly licensed and downloadable.
 - **A3.** BES Internet Panel data is obtainable for research use, and **derived, aggregated** preference profiles at constituency level may be published even where respondent-level data may not. This needs confirming against the BES licence (open question Q-S1 in [11_ROADMAP.md](11_ROADMAP.md)). If it is wrong, G1 weakens for S1 results to "reproducible from the published aggregates" only.
 - **A4.** The full Commons run matrix (11 configurations × up to 5 elections × 2 scenarios × up to 20 plans, i.e. at most 2,200 runs) fits comfortably on a laptop (the M1 MacBook Pro). No cloud compute is assumed.
 - **A5.** Per-run axis scores for the Commons profile are small enough (a few megabytes) to ship to the browser, so client-side re-weighting needs no server.
