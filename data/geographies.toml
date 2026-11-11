@@ -28,10 +28,18 @@ valid_from = "2024-07-04"
 source = "wd24_pcon24_lad24_lookup"
 profiles = ["commons"]
 
+[[layer]]
+id = "SENC2026"
+description = "Senedd Cymru constituencies, May 2026 (16, each pairing two Westminster seats)"
+gss_prefixes = ["W09"]
+drawn_by = ["Democracy and Boundary Commission Cymru"]
+valid_from = "2026-05-07"
+source = "senc2026_names_codes"
+profiles = ["devolved"]
+
 # Planned (not yet ingested): declare source and vintage when the loader lands.
 # OA2021EW      ONS output areas, Census 2021 (MRP frame, England and Wales)
 # DZ2022S       NRS data zones, Scotland's Census 2022 (MRP frame, Scotland)
 # DZ2021NI      NISRA data zones, Census 2021 (MRP frame, Northern Ireland)
 # SPC2026, SPR2026  Holyrood constituencies and regions (2026 review)
-# SENC2026      Senedd 2026 constituencies (16 pairs of Westminster seats)
 # WARD2022S     Scottish council wards used at the 2022 elections (STV golden tests)

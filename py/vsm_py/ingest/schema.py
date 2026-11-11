@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 DDL = """
 CREATE TABLE IF NOT EXISTS meta (
@@ -38,6 +38,32 @@ CREATE TABLE IF NOT EXISTS geography_link (
                     AND (share IS NULL OR (share > 0 AND share <= 1))),
   derived INTEGER NOT NULL CHECK (derived IN (0, 1)),
   PRIMARY KEY (from_layer, from_code, to_layer, to_code)
+);
+CREATE TABLE IF NOT EXISTS area (
+  layer_id TEXT NOT NULL REFERENCES geography_layer(layer_id),
+  gss_code TEXT NOT NULL,
+  name TEXT NOT NULL,
+  PRIMARY KEY (layer_id, gss_code)
+);
+CREATE TABLE IF NOT EXISTS list_result (
+  election_id TEXT NOT NULL,
+  gss_code TEXT NOT NULL,
+  list_seq INTEGER NOT NULL,
+  party_code TEXT NOT NULL REFERENCES party(party_code),
+  individual_name TEXT,  -- set for an individual (non-party) candidate, whose list size is 1
+  votes INTEGER NOT NULL,
+  seats INTEGER NOT NULL,
+  candidates INTEGER NOT NULL CHECK (candidates >= seats),
+  PRIMARY KEY (election_id, gss_code, list_seq),
+  FOREIGN KEY (election_id, gss_code) REFERENCES contest(election_id, gss_code)
+);
+CREATE TABLE IF NOT EXISTS seat_order (
+  election_id TEXT NOT NULL,
+  gss_code TEXT NOT NULL,
+  position INTEGER NOT NULL,
+  list_seq INTEGER NOT NULL,
+  PRIMARY KEY (election_id, gss_code, position),
+  FOREIGN KEY (election_id, gss_code, list_seq) REFERENCES list_result(election_id, gss_code, list_seq)
 );
 CREATE TABLE IF NOT EXISTS election (
   election_id TEXT PRIMARY KEY,

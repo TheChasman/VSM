@@ -26,7 +26,7 @@ A missing test in the `count` or `metrics` crates is a real gap. A missing snaps
 |------|-----------------|--------|
 | First Past the Post (FPTP) count of GE2024 by constituency | Every constituency winner and the 650-seat party totals match the Commons Library | UK Parliament election results, GE2024 `candidacies.csv`. `just golden` |
 | Gallagher index (sub-metric P1, raw) of the actual 2024 result | Within the published range 23.6–24.0 (difference due to "Other" grouping) | `additional-research.md` §2.2 |
-| Senedd 2026 D'Hondt | All 96 seats in 16 six-member districts match the declared result | Senedd Research briefing |
+| Senedd 2026 D'Hondt | All 96 seats in 16 six-member districts match the declared result, including the declared allocation order | Senedd Research briefing (2026-09-03). `just golden` |
 | Single Transferable Vote (STV) with Weighted Inclusive Gregory Method (WIGM): Scottish council wards from the 2022 ballot files | Elected sets match the official declarations, and stage totals match within declared rounding | Scottish council ballot collections |
 | Holyrood Additional Member System (AMS) allocation (2021) | Regional list seats match | Scottish Parliament results |
 | Ballot expressiveness X1 and X2 | Exactly the methodology's worked example table §4.4 (FPTP 24/0, SV 47/0, AV 100/0, STV 100/100, Bloc 3-vote 58/72, and so on) | `new-metrics.md` §4.4 |

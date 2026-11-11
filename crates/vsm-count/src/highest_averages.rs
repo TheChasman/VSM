@@ -33,6 +33,20 @@ pub fn highest_averages(
     prior_seats: &Seats,
     tie: TieBreak,
 ) -> Result<CountResult, CountError> {
+    highest_averages_capped(votes, seats, divisor, prior_seats, &Seats::new(), tie)
+}
+
+/// As [`highest_averages`], but a list stops winning seats once it has won `caps[list]` here
+/// (closed lists with fewer candidates than seats, or an individual candidate, whose cap is 1).
+/// Lists missing from `caps` are uncapped. If every list is exhausted, `NoValidVotes`.
+pub fn highest_averages_capped(
+    votes: &BTreeMap<Party, u64>,
+    seats: u32,
+    divisor: Divisor,
+    prior_seats: &Seats,
+    caps: &Seats,
+    tie: TieBreak,
+) -> Result<CountResult, CountError> {
     if votes.is_empty() {
         return Err(CountError::NoCandidates);
     }
@@ -57,9 +71,16 @@ pub fn highest_averages(
             let (vb, db) = (u128::from(votes[b]), u128::from(divisor.of(held[b])));
             (va * db).cmp(&(vb * da))
         };
-        let best = votes.keys().max_by(|a, b| cmp(a, b)).expect("non-empty");
+        let open = |p: &&Party| {
+            caps.get(*p)
+                .map_or(true, |&cap| won.get(*p).copied().unwrap_or(0) < cap)
+        };
+        let Some(best) = votes.keys().filter(open).max_by(|a, b| cmp(a, b)) else {
+            return Err(CountError::NoValidVotes);
+        };
         let tied: Vec<Party> = votes
             .keys()
+            .filter(open)
             .filter(|p| cmp(p, best) == Ordering::Equal)
             .cloned()
             .collect();
@@ -157,6 +178,22 @@ mod tests {
                 assert_eq!(r.seats.values().sum::<u32>(), n);
             }
         }
+    }
+
+    #[test]
+    fn exhausted_lists_are_skipped() {
+        // Without caps D'Hondt gives A 4, B 3, C 1. A has only 2 candidates; D is an individual.
+        let caps = seats(&[("A", 2), ("D", 1)]);
+        let r = highest_averages_capped(&example(), 8, Divisor::DHondt, &Seats::new(), &caps, LOT)
+            .unwrap();
+        assert_eq!(r.seats, seats(&[("A", 2), ("B", 4), ("C", 1), ("D", 1)]));
+    }
+
+    #[test]
+    fn all_lists_exhausted_is_an_error() {
+        let caps = seats(&[("A", 1), ("B", 1), ("C", 1), ("D", 1)]);
+        let r = highest_averages_capped(&example(), 5, Divisor::DHondt, &Seats::new(), &caps, LOT);
+        assert_eq!(r, Err(CountError::NoValidVotes));
     }
 
     #[test]

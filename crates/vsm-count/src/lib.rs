@@ -15,7 +15,7 @@ mod tie;
 mod topup;
 
 pub use contingent::contingent;
-pub use highest_averages::{highest_averages, Divisor};
+pub use highest_averages::{highest_averages, highest_averages_capped, Divisor};
 pub use irv::{irv, RankedBallot};
 pub use plurality::plurality;
 pub use stv::{stv_wigm_droop, StvParams};

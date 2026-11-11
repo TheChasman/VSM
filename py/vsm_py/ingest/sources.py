@@ -9,7 +9,13 @@ from pathlib import Path
 from . import IngestError
 
 # "boundaries" sources are fetched and verified here, then read by the geography stage.
-LOADERS = {"commons_candidacies", "boundaries", "ons_wd_pcon_lad_lookup"}
+LOADERS = {
+    "commons_candidacies",
+    "boundaries",
+    "ons_wd_pcon_lad_lookup",
+    "arcgis_names_codes",
+    "senedd_briefing_pdf",
+}
 
 
 @dataclass(frozen=True)
@@ -29,6 +35,10 @@ class Source:
     reference_electorate: bool = False
     # Geography layer (data/geographies.toml) whose GSS codes this source uses.
     layer: str | None = None
+    # Loader-specific settings.
+    polling_date: str | None = None  # where the file itself does not state it
+    code_field: str | None = None
+    name_field: str | None = None
 
     def path(self, data_dir: Path) -> Path:
         base = "raw" if self.redistributable else "private"

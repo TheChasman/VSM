@@ -11,7 +11,7 @@ from pathlib import Path
 
 from vsm_py import __version__
 
-from . import IngestError, commons, lookups
+from . import IngestError, commons, lookups, names_codes, senedd
 from .fetch import ensure, sha256_file
 from .parties import Registry
 from .register import load_register, write_register
@@ -33,6 +33,8 @@ LOADERS = {
     "commons_candidacies": commons.load,
     "boundaries": record_only,
     "ons_wd_pcon_lad_lookup": lookups.load_wd_pcon_lad,
+    "arcgis_names_codes": names_codes.load,
+    "senedd_briefing_pdf": senedd.load,
 }
 
 
@@ -71,7 +73,12 @@ def run(data_dir: Path, db: Path, only: set[str] | None) -> int:
             n = LOADERS[s.loader](
                 conn, s, path, sha256_file(path), registry, layers.get(s.layer or ""), layers
             )
-            unit = {"commons_candidacies": "contests", "ons_wd_pcon_lad_lookup": "wards"}.get(s.loader)
+            unit = {
+                "commons_candidacies": "contests",
+                "ons_wd_pcon_lad_lookup": "wards",
+                "arcgis_names_codes": "areas",
+                "senedd_briefing_pdf": "contests",
+            }.get(s.loader)
             print(f"{s.id}: {n} {unit} -> {db}" if unit else f"{s.id}: verified {path}")
     finally:
         conn.close()

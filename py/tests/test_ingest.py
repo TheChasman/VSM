@@ -336,3 +336,15 @@ def test_partial_links_cannot_carry_a_share(tmp_path):
         conn.execute("INSERT INTO geography_link VALUES ('A', 'x', 'A', 'y', 'partial', 0.5, 0)")
     with pytest.raises(sqlite3.IntegrityError):
         conn.execute("INSERT INTO geography_link VALUES ('A', 'x', 'A', 'y', 'exact', NULL, 0)")
+
+
+def test_register_rewrite_keeps_referenced_layers(tmp_path):
+    from vsm_py.ingest.register import write_register
+
+    layers = load_register(_register(tmp_path), [source()])
+    conn = connect(tmp_path / "ref.sqlite")
+    write_register(conn, layers)
+    conn.execute("INSERT INTO area VALUES ('PCON2024', 'E14000001', 'A')")
+    conn.commit()
+    write_register(conn, layers)  # second run must not trip the foreign key
+    assert conn.execute("SELECT COUNT(*) FROM area").fetchone()[0] == 1

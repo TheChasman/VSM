@@ -130,6 +130,7 @@ name = "Communist League Election Campaign"
 [[party]]
 code = "CON"
 name = "Conservative"
+aliases = ["Welsh Conservatives"]
 
 [[party]]
 code = "CP"
@@ -182,10 +183,12 @@ name = "Green Party Northern Ireland"
 [[party]]
 code = "GRN"
 name = "Green Party"
+aliases = ["Wales Green Party"]
 
 [[party]]
 code = "GWLD"
 name = "Gwlad Gwlad"
+aliases = ["Gwlad"]
 
 [[party]]
 code = "HI"
@@ -234,6 +237,7 @@ name = "Kingston Independent Residents Group"
 [[party]]
 code = "LAB"
 name = "Labour"
+aliases = ["Welsh Labour"]
 
 [[party]]
 code = "LCI"
@@ -242,6 +246,7 @@ name = "Liverpool Community Independents"
 [[party]]
 code = "LD"
 name = "Liberal Democrat"
+aliases = ["Welsh Liberal Democrats"]
 
 [[party]]
 code = "LIB"
@@ -454,6 +459,7 @@ name = "Transform Party"
 [[party]]
 code = "TUSC"
 name = "Trade Unionist and Socialist Coalition"
+aliases = ["Welsh Trade Unionist and Socialist Coalition"]
 
 [[party]]
 code = "TUV"
@@ -514,3 +520,17 @@ name = "The Yoruba Party in the UK"
 [[party]]
 code = "YRKS"
 name = "The Yorkshire Party"
+
+# Added 2026-11-11 from the Senedd 2026 results.
+
+[[party]]
+code = "BCP"
+name = "Britain's Communist Party"
+
+[[party]]
+code = "OPEN"
+name = "Open Party"
+
+[[party]]
+code = "WCP"
+name = "Welsh Christian Party"

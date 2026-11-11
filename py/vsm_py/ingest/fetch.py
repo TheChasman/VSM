@@ -45,6 +45,9 @@ def ensure(source: Source, data_dir: Path, client: httpx.Client | None = None) -
             try:
                 with client.stream("GET", source.url) as r:
                     r.raise_for_status()
+                    if r.status_code != 200:
+                        # e.g. 202 "file is being generated": never hash a placeholder.
+                        raise httpx.HTTPStatusError(f"HTTP {r.status_code}", request=r.request, response=r)
                     for chunk in r.iter_bytes():
                         tmp.write(chunk)
             except httpx.HTTPError as e:

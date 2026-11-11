@@ -73,10 +73,16 @@ def load_register(path: Path, sources: list[Source]) -> dict[str, Layer]:
 
 
 def write_register(conn: sqlite3.Connection, layers: dict[str, Layer]) -> None:
+    """Upsert the register. Removing a layer that rows still reference fails (foreign keys)."""
     with conn:
-        conn.execute("DELETE FROM geography_layer")
+        placeholders = ",".join("?" * len(layers))
+        conn.execute(f"DELETE FROM geography_layer WHERE layer_id NOT IN ({placeholders})", list(layers))
         conn.executemany(
-            "INSERT INTO geography_layer VALUES (?, ?, ?, ?, ?, ?, ?)",
+            """INSERT INTO geography_layer VALUES (?, ?, ?, ?, ?, ?, ?)
+               ON CONFLICT (layer_id) DO UPDATE SET description = excluded.description,
+                 gss_prefixes = excluded.gss_prefixes, drawn_by = excluded.drawn_by,
+                 valid_from = excluded.valid_from, valid_to = excluded.valid_to,
+                 source_id = excluded.source_id""",
             [
                 (
                     lay.id,

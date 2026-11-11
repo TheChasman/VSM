@@ -309,3 +309,7 @@ UK geography is a mosaic with no common nesting. Westminster constituencies are 
 ### Amendment (2026-11-11): `partial` links
 
 The ONS ward → constituency lookup (July 2024) flags 388 wards as split between constituencies but publishes no shares. Such links are recorded as `relation = 'partial'` with `share` NULL: an official statement that part of the area lies in the target, nothing more. A share may be added later only as a separate, derived `area_weighted` or `best_fit_population` link. No share is ever guessed.
+
+### Amendment (2026-11-11): sources without codes
+
+Some results sources publish names only (the Senedd Research 2026 briefing). Such a source is matched to the official names and codes of its layer (the `area` table, loaded from an ONS names-and-codes file) once, at ingest. The match ignores only case and spacing, must pair every area exactly once, and stops ingest otherwise. Nothing downstream joins by name.

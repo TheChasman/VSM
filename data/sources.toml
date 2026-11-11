@@ -52,3 +52,33 @@ file = "ons/wd24-pcon24-lad24-utla24-uk-lu.csv"
 loader = "ons_wd_pcon_lad_lookup"
 redistributable = true
 layer = "WD20240704"
+
+[[source]]
+id = "senc2026_names_codes"
+# ONS Senedd Cymru Constituencies (May 2026) Names and Codes in WA: 16 rows, queried as JSON.
+url = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/SENC_MAY_2026_WA_NC/FeatureServer/0/query?where=1%3D1&outFields=*&orderByFields=SENC26CD&returnGeometry=false&f=json"
+licence = "OGL-3.0"
+sha256 = "f72a8087bc8fa2de490ffc6ca3141e2ed556eb5bc6283709f857f4e36b5f14fe"
+file = "ons/senc-2026-names-codes.json"
+loader = "arcgis_names_codes"
+redistributable = true
+layer = "SENC2026"
+code_field = "SENC26CD"
+name_field = "SENC26NM"
+
+[[source]]
+id = "sen2026_briefing"
+# Senedd Research, "Senedd election 2026: Research Briefing" (published 2026-09-03): per-constituency
+# list votes, candidates, seats and elected order. "Copyright Welsh Parliament 2026"; reuse terms
+# not yet confirmed, so kept in data/private and not redistributed (see data/LICENCES.md).
+url = "https://research.senedd.wales/media/v4njg01m/senedd-election-2026.pdf"
+licence = "Welsh-Parliament-copyright"
+sha256 = "93062e83c48f308c8a21bd874ecf619271f6a9063de7f1dab4943245b53ce9a4"
+file = "senedd/senedd-election-2026-briefing.pdf"
+loader = "senedd_briefing_pdf"
+redistributable = false
+election_id = "SEN2026"
+office = "devolved"
+boundary_set = "SENC2026"
+polling_date = "2026-05-07"
+layer = "SENC2026"

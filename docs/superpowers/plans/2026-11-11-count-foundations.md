@@ -59,3 +59,15 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 15. **ONS ward lookup** (`ons_wd_pcon_lad_lookup`): the July 2024 Ward → PCON → LAD → UTLA lookup ("as at 4th July 2024"), pinned whole-file CSV. Layers `WD20240704` and `LAD20240704` registered. Writes `geography_link`: ward → local authority (exact, every ward nests), ward → constituency (exact, or `partial` with no share for the 388 split wards). Stops on wards in more than one local authority or split wards not flagged. Two wards flagged split but listed once (E05015879 St Mary's, S13003041 Irvine South) are recorded as `partial` with a warning. Schema version 3.
 
 **Deviation recorded:** ADR-0014 amended with the `partial` relation (official membership, share NULL), because ONS publishes no shares for split wards. Constituency → local authority shares for G3 are not computed: that waits for the G3 rule (area or electors).
+
+## Slice 8: Senedd 2026 golden test
+
+16. **`highest_averages_capped`**: lists stop winning once they reach their candidate number (individual candidates cap at 1).
+17. **Senedd ingest**: `arcgis_names_codes` loads the ONS SENC 2026 names and codes into `area`; `senedd_briefing_pdf` parses the Senedd Research briefing with `pypdf` into `contest`, `list_result` and `seat_order`, cross-checking list votes against valid votes, six seats, and seats against the elected-member order. Layer `SENC2026` registered. Schema version 4.
+18. **Golden test** `golden_sen2026.rs`: capped D'Hondt reproduces every constituency's seats and declared allocation order, and the national 43/34/9/7/2/1.
+
+**Deviations and findings recorded:**
+- Results source is the Senedd Research briefing PDF: no machine-readable per-constituency results were found. Its reuse terms are unconfirmed, so it is stored in `data/private/` and not redistributed.
+- Name matching to codes is a recorded ADR-0014 exception (amendment).
+- `ensure()` now treats any non-200 response as a failed download (the ONS hub answers 202 while generating a file).
+- `write_register` upserts: deleting all layers each run broke foreign keys once `area` rows existed.

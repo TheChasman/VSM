@@ -88,6 +88,45 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | name | TEXT | no | |
 | aliases | TEXT | yes | JSON array of source spellings |
 
+#### area
+
+- **Purpose**: Official names and codes per layer (ADR-0014), for sources that publish names only.
+- **Primary key**: `(layer_id, gss_code)`
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| layer_id | TEXT | no | FK to `geography_layer` |
+| gss_code | TEXT | no | |
+| name | TEXT | no | Official English name |
+
+#### list_result
+
+- **Purpose**: Observed result per list per list-PR contest (e.g. Senedd 2026). An individual candidate is a list of one.
+- **Primary key**: `(election_id, gss_code, list_seq)`
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| election_id, gss_code | TEXT | no | FK to `contest` |
+| list_seq | INTEGER | no | Order by votes, descending |
+| party_code | TEXT | no | `IND` for individual candidates |
+| individual_name | TEXT | yes | Set for individual candidates |
+| votes | INTEGER | no | |
+| seats | INTEGER | no | Seats won |
+| candidates | INTEGER | no | List size: the most seats the list can win |
+
+#### seat_order
+
+- **Purpose**: The declared order in which a list-PR contest's seats were allocated.
+- **Primary key**: `(election_id, gss_code, position)`
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| election_id, gss_code | TEXT | no | |
+| position | INTEGER | no | 1 = first seat allocated |
+| list_seq | INTEGER | no | FK to `list_result` |
+
 #### contest
 
 - **Purpose**: One constituency contest in one election: the totals each `candidate_result` set must add up to.
