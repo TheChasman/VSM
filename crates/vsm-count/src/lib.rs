@@ -10,6 +10,7 @@ mod contingent;
 mod highest_averages;
 mod irv;
 mod plurality;
+mod stv;
 mod tie;
 mod topup;
 
@@ -17,6 +18,7 @@ pub use contingent::contingent;
 pub use highest_averages::{highest_averages, Divisor};
 pub use irv::{irv, RankedBallot};
 pub use plurality::plurality;
+pub use stv::{stv_wigm_droop, StvParams};
 pub use tie::TieBreak;
 pub use topup::{compensatory_topup, Overhang};
 
@@ -52,6 +54,17 @@ pub enum CountEvent {
     Elected {
         round: u32,
         party: Party,
+    },
+    /// STV quota, in fixed-point units of 10^-decimals.
+    Quota {
+        quota: u64,
+        decimals: u32,
+    },
+    /// An elected candidate's surplus transferred (fixed-point units).
+    Surplus {
+        round: u32,
+        party: Party,
+        surplus: u64,
     },
     /// Levelling seats added to a top-up tier to absorb overhang.
     LevellingSeats {

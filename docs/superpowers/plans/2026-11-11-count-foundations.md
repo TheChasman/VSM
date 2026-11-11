@@ -26,3 +26,7 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 
 8. **`contingent`.** SV, and the Two-Round System (TRS) under S1. If no first-round majority, the top two continue and every other ballot transfers to whichever of the two it ranks higher. Ties for second place go to the declared tie-break.
 9. **`compensatory_topup`.** AMS and AV+ top-up tier over list votes, given constituency seats. The overhang rule is a required parameter (`Overhang::Keep`, Holyrood practice, or `Overhang::Level`, which adds levelling seats until no party's entitlement is below its constituency seats). No default: open question in [05_COMPONENTS.md](../../05_COMPONENTS.md#count).
+
+## Slice 3 tasks
+
+10. **`stv_wigm_droop`.** Scottish council STV (Scottish Local Government Elections Order 2007 counting rules), fixed point per ADR-0006 (accepted 2026-11-11): every value is an integer count of 10^-`decimals` units, truncated. Droop quota on whole first preferences. One surplus per stage, largest first; WIGM transfers every paper held by the elected candidate at `surplus × paper value ÷ total`, truncated per paper. No surplus left: exclude the lowest, papers move at their current value. Ties: most recent earlier stage, then the lot. Elect all continuing candidates once they equal the remaining vacancies. Hand-worked tests now; golden tests against the 2022 ward ballot files follow `ingest`.

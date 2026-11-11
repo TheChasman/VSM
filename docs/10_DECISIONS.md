@@ -123,7 +123,7 @@ Every random stream is seeded from `sha256(spec_hash ‖ component ‖ config_id
 ## ADR-0006: Fixed-point arithmetic for Single Transferable Vote transfers
 
 - **Date**: 2026-11-11
-- **Status**: Proposed
+- **Status**: Accepted
 
 ### Context
 
