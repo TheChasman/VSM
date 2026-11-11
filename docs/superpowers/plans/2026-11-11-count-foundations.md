@@ -21,3 +21,8 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 ## Checks
 
 `cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test`
+
+## Slice 2 tasks
+
+8. **`contingent`.** SV, and the Two-Round System (TRS) under S1. If no first-round majority, the top two continue and every other ballot transfers to whichever of the two it ranks higher. Ties for second place go to the declared tie-break.
+9. **`compensatory_topup`.** AMS and AV+ top-up tier over list votes, given constituency seats. The overhang rule is a required parameter (`Overhang::Keep`, Holyrood practice, or `Overhang::Level`, which adds levelling seats until no party's entitlement is below its constituency seats). No default: open question in [05_COMPONENTS.md](../../05_COMPONENTS.md#count).

@@ -6,15 +6,19 @@
 //! Votes and ballot weights are integers. Callers scale fractional survey weights to
 //! integer units before counting, so results never depend on floating-point order.
 
+mod contingent;
 mod highest_averages;
 mod irv;
 mod plurality;
 mod tie;
+mod topup;
 
+pub use contingent::contingent;
 pub use highest_averages::{highest_averages, Divisor};
 pub use irv::{irv, RankedBallot};
 pub use plurality::plurality;
 pub use tie::TieBreak;
+pub use topup::{compensatory_topup, Overhang};
 
 use serde::Serialize;
 use std::collections::BTreeMap;
@@ -49,6 +53,10 @@ pub enum CountEvent {
         round: u32,
         party: Party,
     },
+    /// Levelling seats added to a top-up tier to absorb overhang.
+    LevellingSeats {
+        added: u32,
+    },
     Eliminated {
         round: u32,
         party: Party,
@@ -77,6 +85,8 @@ pub enum CountError {
     NoSeats,
     /// Every ballot is empty or exhausted before a winner is found.
     NoValidVotes,
+    /// Levelling needed more extra seats than the configuration allows.
+    LevellingLimit,
 }
 
 impl std::fmt::Display for CountError {
@@ -85,6 +95,7 @@ impl std::fmt::Display for CountError {
             Self::NoCandidates => write!(f, "no candidates"),
             Self::NoSeats => write!(f, "no seats to fill"),
             Self::NoValidVotes => write!(f, "no valid votes"),
+            Self::LevellingLimit => write!(f, "levelling exceeded the configured seat limit"),
         }
     }
 }
