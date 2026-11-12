@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
 
 DDL = """
 CREATE TABLE IF NOT EXISTS meta (
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS list_result (
   individual_name TEXT,  -- set for an individual (non-party) candidate, whose list size is 1
   votes INTEGER NOT NULL,
   seats INTEGER NOT NULL,
-  candidates INTEGER NOT NULL CHECK (candidates >= seats),
+  candidates INTEGER CHECK (candidates IS NULL OR candidates >= seats),  -- NULL: list size not published
   PRIMARY KEY (election_id, gss_code, list_seq),
   FOREIGN KEY (election_id, gss_code) REFERENCES contest(election_id, gss_code)
 );

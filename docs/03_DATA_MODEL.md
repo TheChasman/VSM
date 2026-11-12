@@ -114,7 +114,7 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | individual_name | TEXT | yes | Set for individual candidates |
 | votes | INTEGER | no | |
 | seats | INTEGER | no | Seats won |
-| candidates | INTEGER | no | List size: the most seats the list can win |
+| candidates | INTEGER | yes | List size: the most seats the list can win. NULL where the source does not publish it (Holyrood 2021 party lists); 1 for an individual |
 
 #### seat_order
 
