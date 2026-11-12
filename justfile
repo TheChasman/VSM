@@ -26,9 +26,11 @@ py-lint:
 py-test:
     cd py && uv run pytest -q
 
-# Fetch, verify and load every source into data/reference.sqlite.
+# Fetch, verify and load every source into data/reference.sqlite, then geography. Geography always
+# follows: a schema change rebuilds the database and would otherwise leave areas and adjacency empty.
 ingest:
     uv run --project py vsm-ingest run --data-dir data
+    uv run --project py vsm-geography run --data-dir data
 
 # Areas and contiguity graph (needs `just ingest`).
 geography:
