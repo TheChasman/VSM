@@ -25,7 +25,7 @@ Effort estimates are left as TODO. No code exists yet, and estimates would be gu
   - X1 and X2 reproduce methodology table §4.4.
   - The local checks (`just all`, pre-commit hook) run the fixture pipeline. No hosted CI (owner standing order).
 - **Estimated effort**: <!-- TODO -->
-- **Status**: Not started
+- **Status**: In progress (2026-11-12, branch `feature/count-foundations`). Met: `justfile` and licence files; `reference.sqlite` built from pinned checksums and reproduced by `just verify`; all four golden tests; X1 and X2. Open: the repository is not yet public; the fixture pipeline does not exist yet, because the stages it runs (`districts`, `run`, `metrics`, `views`, `publish`) are not built.
 
 ### Phase 2: Freeze, then Commons S0 lower bound
 
