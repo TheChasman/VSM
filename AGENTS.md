@@ -23,7 +23,7 @@ For Claude-specific additions, see [CLAUDE.md](CLAUDE.md).
 ### Rules specific to this project
 
 1. **The methodology is not yours to change.** Anchors, star bands, weights, sub-metric definitions, applicability and grades live in `spec/*.toml`, derived from `research/`. Never hard-code any of them in Rust, Python or Svelte. If code needs a methodology value, read it from the spec crate or loader.
-2. **Never edit a frozen spec file** without being explicitly asked. If `spec/FROZEN` exists, changes need a version bump and a methodology changelog entry. CI enforces this.
+2. **Never edit a frozen spec file** without being explicitly asked. If `spec/FROZEN` exists, changes need a version bump and a methodology changelog entry. The pre-commit hook enforces this.
 3. **N/A is not zero.** A sub-metric that does not apply is `null` or absent. Never write `0` to mean "not applicable".
 4. **Determinism is a requirement.** All randomness goes through seeded streams derived from the spec hash (ADR-0005). No `HashMap` iteration into outputs, no wall-clock values in outputs, no thread-order dependence.
 5. **No respondent-level British Election Study (BES) data** in commits, fixtures, logs, test output or examples. `data/private/` is off limits for anything except reading by the preferences stage.
@@ -91,7 +91,7 @@ Do not touch these without explicit human direction:
 - `data/private/`
 - Published bundles and release tags
 - Anchor, weight or band values anywhere
-- CI workflow permissions and the deploy job
+- Git hooks (`scripts/hooks/`) and the deploy script
 
 ## House conventions for generated output
 

@@ -98,7 +98,7 @@ flowchart LR
 | Component | Where it runs |
 |-----------|---------------|
 | Pipeline (all stages) | Maintainer's M1 MacBook Pro ("Kirk"). Optionally the lid-down 2015 MacBook Pro server ("SpocksPad") for long S1 batches |
-| Reproducibility check | Continuous Integration (CI) on the public repository host. It re-runs a reduced matrix and compares hashes ([09_TESTING.md](09_TESTING.md)) |
+| Reproducibility check | Local rebuild (`just verify`) by the maintainer before each tag; no hosted CI. It re-runs a reduced matrix and compares hashes ([09_TESTING.md](09_TESTING.md)) |
 | Static site | <!-- TODO: static host not chosen. Candidates: Cloudflare Pages, GitHub Pages. See ADR-0010 (Proposed). --> |
 | Data bundle archive | Attached to each tagged release on the repository host, plus <!-- TODO: long-term archive with a DOI, e.g. Zenodo — confirm --> |
 

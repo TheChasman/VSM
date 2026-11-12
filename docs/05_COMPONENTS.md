@@ -489,7 +489,7 @@ SvelteKit, `d3-shape` and `d3-scale` for arcs and bands. Hex layout uses HexJSON
 | Failure | Detection | Response |
 |---------|-----------|----------|
 | Bundle schema major version unknown | Version check | Show a clear incompatibility message |
-| `runs.json` too large for mobile | Size budget in CI | Fail CI above the budget. <!-- TODO: set the budget --> |
+| `runs.json` too large for mobile | Size budget in `just verify` | Fail the local check above the budget. <!-- TODO: set the budget --> |
 
 ### Open questions
 

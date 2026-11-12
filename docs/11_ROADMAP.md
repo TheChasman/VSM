@@ -23,7 +23,7 @@ Effort estimates are left as TODO. No code exists yet, and estimates would be gu
   - `ingest` and `geography` build `reference.sqlite` for 2024 (and notional 2019), with checksums.
   - `count` passes the golden tests: 2024 First Past the Post (FPTP), Senedd 2026 D'Hondt, Holyrood 2021 Additional Member System (AMS), and Scottish 2022 Single Transferable Vote (STV) wards.
   - X1 and X2 reproduce methodology table §4.4.
-  - CI runs the fixture pipeline.
+  - The local checks (`just all`, pre-commit hook) run the fixture pipeline. No hosted CI (owner standing order).
 - **Estimated effort**: <!-- TODO -->
 - **Status**: Not started
 

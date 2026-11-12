@@ -114,7 +114,7 @@ Every random stream is seeded from `sha256(spec_hash ‖ component ‖ config_id
 
 ### Consequences
 
-- Rebuilds are verifiable in CI.
+- Rebuilds are verifiable locally with `just verify`.
 - Changing the spec changes every seed, even for unaffected configurations. That is acceptable, because any spec change is a new version anyway.
 - Developers must avoid `HashMap` iteration order and thread-order dependence. Clippy lints and the determinism test catch some of this, not all.
 

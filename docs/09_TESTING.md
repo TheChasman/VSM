@@ -48,13 +48,13 @@ A missing test in the `count` or `metrics` crates is a real gap. A missing snaps
 
 ## Integration tests
 
-- **Python → Rust hand-off**: a small fixture `reference.sqlite` (Wales only, 32 constituencies, 2024 results, synthetic ballot profiles) is run through `districts → run → metrics → views → publish` in CI on every push.
+- **Python → Rust hand-off**: a small fixture `reference.sqlite` (Wales only, 32 constituencies, 2024 results, synthetic ballot profiles) is run through `districts → run → metrics → views → publish` by `just all` before every push.
 - **District generator on Wales**: at least one generated plan for a six-member configuration must equal or closely match the Senedd 2026 pairing (16 districts of two constituencies). The plan-distance distribution is reported.
 - **Schema contract**: the published bundle validates against `bundle/schema/*.json`. The site test suite loads the fixture bundle.
 
 ## End-to-end tests
 
-- `just verify` on the release candidate: a full rebuild from a clean checkout must match `manifest.json` hashes. It runs in CI for S0, and on the maintainer's machine for S1.
+- `just verify` on the release candidate: a full rebuild from a clean checkout must match `manifest.json` hashes. It runs on the maintainer's machine for both S0 and S1.
 - Playwright smoke tests on the preview site: each page renders, the weights page recomputes, stars show grades. Flaky tests are quarantined with an issue, never silently retried.
 
 ## Fixtures and seed data
@@ -63,13 +63,15 @@ A missing test in the `count` or `metrics` crates is a real gap. A missing snaps
 - `fixtures/counts/`: small hand-built elections with known answers, including tie cases and the AV monotonicity counter-example.
 - Fixtures contain **no** respondent-level British Election Study (BES) data. Synthetic ballot profiles are generated from a seeded distribution.
 
-## Continuous Integration (CI)
+## Local checks (no hosted CI)
+
+There is no hosted Continuous Integration (CI): owner standing order. Every check runs on the maintainer's machine through `just` and the git hooks.
 
 | Trigger | Runs |
 |---------|------|
-| Every push and pull request | `cargo fmt --check`, `cargo clippy -D warnings`, `cargo test`, `ruff check`, `ruff format --check`, `pytest`, site lint and `vitest`, the fixture pipeline, bundle schema validation, frozen-spec guard (no spec change without a version bump and changelog), private-data scan |
-| Release candidate tag | All of the above, plus a full S0 rebuild and hash comparison, a rebuild of downstream stages from the published `ballot_profile`, the Lighthouse budget and Playwright smoke tests |
-| Monthly schedule | Rebuild of the latest release (reproducibility drift), `cargo audit`, `pip-audit`, `npm audit` |
+| Pre-commit and pre-push hooks (`just all`) | `cargo fmt --check`, `cargo clippy -D warnings`, `cargo test`, `ruff check`, `ruff format --check`, `pytest`, site lint and `vitest`, the fixture pipeline, bundle schema validation, frozen-spec guard (no spec change without a version bump and changelog), private-data scan |
+| `just verify`, before tagging a release candidate | All of the above, plus a full S0 rebuild and hash comparison, a rebuild of downstream stages from the published `ballot_profile`, the Lighthouse budget and Playwright smoke tests |
+| `just audit`, run by hand at least monthly | Rebuild of the latest release (reproducibility drift), `cargo audit`, `pip-audit`, `npm audit` |
 
 ## Coverage targets
 
@@ -79,10 +81,10 @@ A missing test in the `count` or `metrics` crates is a real gap. A missing snaps
 
 ## Test data privacy
 
-Real BES respondent data never appears in tests, fixtures, CI caches or logs. The private-data scan fails CI if any file matching BES naming patterns, or a `.sav` or `.dta` file, is committed or appears in a release archive. See [06_SECURITY.md](06_SECURITY.md).
+Real BES respondent data never appears in tests, fixtures, caches or logs. The private-data scan (pre-commit hook and `just verify`) fails if any file matching BES naming patterns, or a `.sav` or `.dta` file, is committed or appears in a release archive. See [06_SECURITY.md](06_SECURITY.md).
 
 ## Performance and load tests
 
-- **Pipeline**: `run_duration_seconds` per configuration is tracked across releases. A regression of more than 50 % on the fixture run fails CI.
+- **Pipeline**: `run_duration_seconds` per configuration is tracked across releases. A regression of more than 50 % on the fixture run fails `just verify`.
 - **S2 manipulability search**: a benchmark (`cargo bench`) on a fixed STV district, because this is the expected hot spot.
-- **Site**: Lighthouse budget in CI (Largest Contentful Paint under 2.5 s on the mobile profile), and the `runs.json` size budget.
+- **Site**: Lighthouse budget in `just verify` (Largest Contentful Paint under 2.5 s on the mobile profile), and the `runs.json` size budget.

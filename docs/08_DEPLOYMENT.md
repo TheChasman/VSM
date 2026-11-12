@@ -44,14 +44,14 @@ just test         # cargo test; uv run pytest; (cd site && npm test)
 1. **Methodology freeze** (once per spec version): `vsm spec freeze --version X.Y`. Commit `spec/FROZEN` and push a signed tag `spec-vX.Y` **before** any scoring run is published (principle P10).
 2. **Full run** on the maintainer's machine: `just ingest prefs pipeline publish`.
 3. **Health review**: read `reports/pipeline-{date}.md`. Zero invariant failures is a hard gate. Clamp, tie-break and calibration figures are reviewed.
-4. **Release candidate**: tag `vX.Y.Z-rc.N`. CI rebuilds the S0 matrix independently and compares hashes (S1 cannot be rebuilt in CI because it needs BES data; CI verifies everything downstream of the published `ballot_profile`). The site deploys to preview.
-5. **Release**: a signed tag `vX.Y.Z`. CI attaches the release archive (bundle, `reference.sqlite`, `runs.sqlite`, open-licence raw data, logs, checksums) and deploys the site.
+4. **Release candidate**: tag `vX.Y.Z-rc.N`. `just verify` rebuilds the S0 matrix from a clean checkout and compares hashes (S1 cannot be rebuilt without BES data; the check covers everything downstream of the published `ballot_profile`). The site deploys to preview.
+5. **Release**: a signed tag `vX.Y.Z`. A local release script attaches the release archive (bundle, `reference.sqlite`, `runs.sqlite`, open-licence raw data, logs, checksums) and deploys the site.
 6. **Rollback**: redeploy the previous tag's site build. Published bundles are immutable; a wrong number is corrected by a new release with a changelog entry, never by editing files in place.
 
 ## Infrastructure
 
 - **Compute**: the maintainer's M1 MacBook Pro (32 GB). Long S1 batches may run on the 2015 MacBook Pro server. No cloud compute is needed for the Commons profile (assumption A4).
-- **CI**: on the public repository host. <!-- TODO: GitHub Actions is the likely choice; confirm the repository host. -->
+- **CI**: none hosted (owner standing order). Local `just` targets and the pre-commit hook do the work.
 - **Static hosting**: <!-- TODO: ADR-0010 (Proposed) — Cloudflare Pages or GitHub Pages. -->
 - **Archive**: release assets on the repository host. <!-- TODO: optional Zenodo deposit for a citable DOI. -->
 
@@ -70,7 +70,7 @@ just test         # cargo test; uv run pytest; (cd site && npm test)
 
 ## Secrets handling
 
-The pipeline needs no secrets. CI holds the deploy token only. See [06_SECURITY.md](06_SECURITY.md).
+The pipeline needs no secrets. The deploy token is held by SpockLock on the maintainer's machine only. See [06_SECURITY.md](06_SECURITY.md).
 
 ## Backups and disaster recovery
 
@@ -81,4 +81,4 @@ The pipeline needs no secrets. CI holds the deploy token only. See [06_SECURITY.
 
 ## Cost notes
 
-Expected to be nearly zero: free-tier static hosting and CI minutes for a public repository. The dominant cost is the maintainer's machine time for S1 runs. A custom domain, if wanted, is the only fixed cost. <!-- TODO: confirm once host and domain are chosen -->
+Expected to be nearly zero: free-tier static hosting. The dominant cost is the maintainer's machine time for S1 runs. A custom domain, if wanted, is the only fixed cost. <!-- TODO: confirm once host and domain are chosen -->

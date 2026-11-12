@@ -9,28 +9,28 @@ Voting System Metrics (VSM) publishes static data with no user accounts, so clas
 | Partisan critic (any side) | To discredit results as rigged towards a system | Public repository, site, bundle | Pre-registration hash, public code and data, one-command rebuild, published sensitivity analysis |
 | Motivated misquoter | To publish a screenshot that misrepresents a score (for example, a grade C score shown as observed) | The site | Every chart is stamped with grade, band and spec version; there is no single "overall winner" to crop |
 | Maintainer bias, including unintended | To tune anchors or weights after seeing results | `spec/` | Freeze before scoring. Any post-freeze change is versioned, logged and shows which scores moved (methodology §6.6). Campaign affiliations declared |
-| Supply-chain attacker | To alter results through a compromised dependency | Package registries, CI | Lockfiles, `cargo audit`, `pip-audit`, `npm audit`, pinned CI actions, reproducibility check by an independent CI runner |
+| Supply-chain attacker | To alter results through a compromised dependency | Package registries | Lockfiles, `cargo audit`, `pip-audit`, `npm audit`, reproducibility check by `just verify` from a clean checkout |
 | Repository or host account takeover | To swap the bundle or site for doctored numbers | Repository and host accounts | Multi-factor authentication (MFA) on all accounts; tagged releases signed; manifest hashes published in the release notes, so a swapped bundle is detectable |
-| Accidental leak by the maintainer | — | `data/private/` | Git-ignored path, a pre-commit hook that blocks BES file patterns, a CI check that scans the release archive |
+| Accidental leak by the maintainer | — | `data/private/` | Git-ignored path, a pre-commit hook that blocks BES file patterns, a `just verify` check that scans the release archive |
 
 Not considered credible enough to design for: denial of service against a static host (the host handles it), and theft of non-public data (none exists except BES files, covered above).
 
 ## Identity and authentication
 
 - **Users**: None. The site is anonymous and read-only.
-- **Services**: CI deploys to the static host with a scoped deploy token.
-- **Tokens**: One deploy token, stored as a CI secret, limited to the site project. Rotated yearly or when a maintainer leaves.
+- **Services**: The maintainer deploys to the static host with a scoped deploy token (no hosted CI).
+- **Tokens**: One deploy token, held in SpockLock, limited to the site project. Rotated yearly or when a maintainer leaves.
 
 ## Authorisation
 
 - Writes to `main` and tags: maintainer only, through protected branches.
-- Changes to `spec/` after a freeze need an Architecture Decision Record (ADR) or methodology changelog entry in the same pull request. CI fails a pull request that changes frozen spec files without bumping `spec/FROZEN` and adding a changelog line.
+- Changes to `spec/` after a freeze need an Architecture Decision Record (ADR) or methodology changelog entry in the same pull request. The pre-commit hook rejects a commit that changes frozen spec files without bumping `spec/FROZEN` and adding a changelog line.
 
 ## Secrets
 
 | Secret | Storage | Rotation cadence | Accessed by |
 |--------|---------|------------------|-------------|
-| Static-host deploy token | CI secret store | Yearly | Deploy job only |
+| Static-host deploy token | SpockLock (1Password) | Yearly | Deploy job only |
 | Release-signing key | <!-- TODO: GPG or SSH signing key location; the maintainer may keep it in SpockLock --> | On compromise | Maintainer |
 | BES download credentials | Not stored. Downloads are manual after registration | n/a | Maintainer |
 

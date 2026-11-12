@@ -39,17 +39,17 @@ Not used. Stages are coarse and sequential, and `tracing` spans with timing in t
 | Reproducibility: rebuild from a tagged release matches every `manifest.json` file hash | 100 % | Every release, and monthly on the latest release |
 | Invariant suite passes before publish | 100 % | Every publish |
 | Full Commons rebuild (S0 and S1) on the maintainer's M1 MacBook Pro | <!-- TODO: set after the first full run --> | Per release |
-| Site Largest Contentful Paint (LCP) on a mid-range phone | Under 2.5 s | Per release (Lighthouse in CI) |
+| Site Largest Contentful Paint (LCP) on a mid-range phone | Under 2.5 s | Per release (Lighthouse in `just verify`) |
 
 ## Alerts
 
 | Alert | Condition | Severity | Runbook |
 |-------|-----------|----------|---------|
-| Reproducibility drift | Monthly CI rebuild hash ≠ published hash | High | Bisect between the release commit and the rebuild environment; check toolchain and lockfile drift first. Publish a notice if a published number is affected |
+| Reproducibility drift | Monthly `just audit` rebuild hash ≠ published hash | High | Bisect between the release commit and the rebuild environment; check toolchain and lockfile drift first. Publish a notice if a published number is affected |
 | Source changed upstream | `ingest` checksum mismatch | Medium | Do not overwrite. Diff the files, decide whether to adopt, record a new source version |
 | Dependency advisory | `cargo audit`, `pip-audit` or `npm audit` finding | Medium | Patch, rebuild, check the hashes are unchanged |
 
-Alerts are delivered as CI failure notifications. There is no paging.
+Alerts are failures of the local `just` checks, seen by the maintainer when run. There is no paging and no hosted CI.
 
 ## Dashboards
 

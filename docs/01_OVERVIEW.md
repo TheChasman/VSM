@@ -14,7 +14,7 @@ The first release covers the Commons profile, configurations C01–C11. Devolved
 
 ## Goals
 
-- **G1 Reproducible.** Any published score can be regenerated bit-for-bit from the tagged repository, the frozen spec files and the public input data (or, for licensed inputs, the documented derived aggregates). Verified by a CI rebuild that compares output hashes.
+- **G1 Reproducible.** Any published score can be regenerated bit-for-bit from the tagged repository, the frozen spec files and the public input data (or, for licensed inputs, the documented derived aggregates). Verified by a local rebuild (`just verify`) that compares output hashes. No hosted CI.
 - **G2 Pre-registered.** Anchors, star bands, reference contest, criteria table, configuration list and weight profiles are frozen and hashed before any configuration is scored. Every published result carries that hash.
 - **G3 Configuration-level.** Every scored item is a fully parameterised configuration (methodology §2). The engine refuses to score an under-specified one.
 - **G4 Honest uncertainty.** Every score is reported as median, p10–p90 band and evidence grade. Grade C results are never drawn as a single crisp arc.
