@@ -12,6 +12,7 @@ from pathlib import Path
 from vsm_py import __version__
 
 from . import IngestError, commons, council, holyrood, lookups, names_codes, senedd
+from .digest import digest
 from .fetch import ensure, sha256_file
 from .parties import Registry
 from .register import load_register, write_register
@@ -106,10 +107,15 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--data-dir", type=Path, default=Path(os.environ.get("VSM_DATA_DIR", "data")))
     r.add_argument("--db", type=Path, default=None, help="default: <data-dir>/reference.sqlite")
     r.add_argument("--only", action="append", help="source id (repeatable)")
+    d = sub.add_parser("digest", help="print the canonical content digest of a reference.sqlite")
+    d.add_argument("db", type=Path)
     args = parser.parse_args(argv)
 
     if args.version or args.cmd == "version":
         print(json.dumps(version_info()))
+        return 0
+    if args.cmd == "digest":
+        print(digest(args.db))
         return 0
     if args.cmd != "run":
         parser.print_help()

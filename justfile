@@ -39,3 +39,12 @@ golden:
     cargo test --workspace -- --ignored
 
 all: check py-lint py-test
+
+# Release-candidate check: private-data scan, all checks, clean rebuild compared by digest,
+# golden tests on the rebuild. Slow (rebuilds reference.sqlite).
+verify:
+    scripts/verify.sh
+
+# Dependency advisories (cargo audit, pip-audit). Run at least monthly.
+audit:
+    scripts/audit.sh
