@@ -101,3 +101,10 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 - Decimals: rule 48(3) of the Order, "calculated to five decimal places (any remainder being ignored)", so `StvParams::SCOTTISH` (5) as planned.
 - Schema version 6: `contest.seats`, `stv_candidate`, `stv_ballot`, `stv_stage`. Party registry: aliases for BUP, FA and VUK; new codes SEFP, PENP, RUBP, WDCP.
 - The golden test passed first time: all 347 contested wards elect the declared councillors at the declared stages, with no ties, and all 1,358 declared Edinburgh stage values match to 10^-5.
+
+## Slice 11: ballot expressiveness X1 and X2
+
+23. **`vsm-metrics` crate**, first module `expressiveness`. Ballot counts are derived from each ballot's structure (single vote, fixed run-off, optional blank, partial ranking, capped multiset of votes) over the reference contest (6 parties, 3 candidates each), not copied from the table. Score = 100 × log₂(ballots) ÷ denominator, capped at 100, rounded to nearest.
+24. **Test** `tests/worked_example.rs`: every row of `research/new-metrics.md` §4.4 reproduces exactly (ballot counts, X1, X2, and X1 bits to two decimals).
+
+**Finding recorded (methodology issue, not resolved in code):** the table depends on the *rounded* denominators written in §4 (10.93 and 3.91). With the exact log₂(1956) = 10.9337, Limited Vote X1 is 43.49 and rounds to 43, not the published 44. The code uses the constants as written. Before freeze, the methodology should say explicitly that the rounded constants are normative, or the table should change to 43.

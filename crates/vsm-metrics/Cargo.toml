@@ -1,0 +1,11 @@
+[package]
+name = "vsm-metrics"
+description = "Sub-metrics, anchors and aggregation for Voting System Metrics"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde.workspace = true

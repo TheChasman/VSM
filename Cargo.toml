@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/vsm-count", "crates/vsm-cli"]
+members = ["crates/vsm-count", "crates/vsm-metrics", "crates/vsm-cli"]
 
 [workspace.package]
 version = "0.1.0"
