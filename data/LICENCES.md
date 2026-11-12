@@ -22,6 +22,8 @@ Each source in `data/sources.toml` needs an entry here before its files ship in 
 | Ordnance Survey (OS) Boundary-Line | OGL v3.0 | <!-- TODO: OS copyright and database right statement --> | Yes (not yet used) |
 | Senedd Research, "Senedd election 2026: Research Briefing" (Senedd 2026 results) | Copyright Welsh Parliament 2026; reuse terms not confirmed | <!-- TODO: confirm reuse terms with Senedd Research --> | **No**, until terms are confirmed (kept in `data/private/`) |
 | ONS Senedd Cymru Constituencies (May 2026) Names and Codes | OGL v3.0 | Source: Office for National Statistics licensed under the Open Government Licence v3.0 | Yes |
+| ONS Scottish Parliamentary Constituency to Region (December 2020) Lookup in Scotland | OGL v3.0 | Source: Office for National Statistics licensed under the Open Government Licence v3.0 | Yes |
+| Electoral Management Board for Scotland (EMB), "SPE21 - Full Votes and Seats by Party/Candidate" (Holyrood 2021 results) | Reuse terms not stated on emb.scot | <!-- TODO: confirm reuse terms with the EMB --> | **No**, until terms are confirmed (kept in `data/private/`) |
 | Scottish council ballot collections | <!-- TODO: confirm --> | <!-- TODO --> | Only if the licence allows |
 | 2024 constituency hex layout | <!-- TODO: confirm (Q-H2) --> | <!-- TODO --> | Only if the licence allows |
 | Chapel Hill Expert Survey (CHES) | <!-- TODO: confirm --> | <!-- TODO --> | Only if the licence allows |

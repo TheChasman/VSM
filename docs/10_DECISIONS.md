@@ -313,3 +313,5 @@ The ONS ward → constituency lookup (July 2024) flags 388 wards as split betwee
 ### Amendment (2026-11-11): sources without codes
 
 Some results sources publish names only (the Senedd Research 2026 briefing). Such a source is matched to the official names and codes of its layer (the `area` table, loaded from an ONS names-and-codes file) once, at ingest. The match ignores only case and spacing, must pair every area exactly once, and stops ingest otherwise. Nothing downstream joins by name.
+
+Where a source's spelling differs from the official name by more than case and spacing, the loader lists the pair explicitly (the EMB Holyrood 2021 workbook: "Orkney", "Shetland", "South of Scotland", "West of Scotland"). No fuzzy matching.

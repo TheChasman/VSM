@@ -71,3 +71,17 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 - Name matching to codes is a recorded ADR-0014 exception (amendment).
 - `ensure()` now treats any non-200 response as a failed download (the ONS hub answers 202 while generating a file).
 - `write_register` upserts: deleting all layers each run broke foreign keys once `area` rows existed.
+
+## Slice 9: Holyrood 2021 AMS golden test
+
+19. **Holyrood sources**: names and codes for the 73 Scottish Parliament constituencies and 8 regions (ONS SPC/SPR, layers registered per ADR-0014), plus the 2021 results: constituency candidate votes and regional list votes per party, with the declared regional MSPs. Prefer an official machine-readable source (parliament.scot or SPICe data); record any fallback (council PDFs, briefing PDF) as a deviation, along with its licence and whether it can be redistributed. Same rules as before: pinned SHA-256, cross-checks (candidate votes sum to valid votes, 73 constituency + 56 regional seats), one transaction per source.
+20. **Golden test** `golden_sp2021.rs`: FPTP gives the 73 constituency winners; `compensatory_topup` (D'Hondt, `Overhang::Keep`, seven seats per region, constituency seats counted per region) gives every region's declared list seats, and the national 64/31/22/8/4 total.
+
+**Deviations and findings recorded:**
+- Results source is the Electoral Management Board for Scotland (EMB) workbook "SPE21 - Full Votes and Seats by Party/Candidate" (`emb.scot`, xlsx): official and machine-readable. parliament.scot serves a browser challenge to scripted downloads, and the Electoral Commission site answers 403. The EMB states no reuse terms, so the file is stored in `data/private/` and not redistributed.
+- Names and codes come from one ONS file, the SPC → SPR (December 2020) lookup: the last vintage before the 2021-05-06 poll (2011 boundaries). It also gives the constituency → region links (`geography_link`, exact). Layers `SPC2021` (S16) and `SPR2021` (S17) registered.
+- Four EMB names differ from ONS by more than case and spacing (Orkney, Shetland, South of Scotland, West of Scotland); they are listed explicitly in the loader (ADR-0014 amendment note).
+- The workbook gives constituency votes per party column, with independents summed per constituency (`Independent Candidates`, `Candidate - No description`, both `IND`); no 2021 constituency was won by an independent. It does not give party list sizes, so `list_result.candidates` is now nullable (NULL for Holyrood 2021 party lists). Schema version 5.
+- New dependency `openpyxl` (reads the xlsx). Cross-checks: candidate and list votes sum to valid votes (ballots less rejected), one winner per constituency, 73 constituencies, 8 regions of 7 seats, and every named party's votes and seats in both tiers agree with the Summary sheet.
+- Party registry: Scottish branch spellings added as aliases (e.g. Scottish Labour Party → `LAB`, Scottish Renew → `REN`); seven new codes for parties first seen here (ASPP, AFU, IGV, RSC, SCF, RECL, VAN).
+- The golden test passed first time: no ties, every region's list seats and the national 64/31/22/8/4 reproduced.
