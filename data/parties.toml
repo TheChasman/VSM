@@ -22,10 +22,12 @@ name = "Alliance for Green Socialism"
 [[party]]
 code = "ALBA"
 name = "Alba Party"
+aliases = ["ALBA PARTY"]
 
 [[party]]
 code = "ANWP"
 name = "Animal Welfare Party"
+aliases = ["ANIMAL WELFARE PARTY"]
 
 [[party]]
 code = "AONT"
@@ -122,6 +124,7 @@ name = "Communist Future"
 [[party]]
 code = "COMM"
 name = "Communist Party of Britain"
+aliases = ["COMMUNIST PARTY OF BRITAIN"]
 
 [[party]]
 code = "COMML"
@@ -130,7 +133,7 @@ name = "Communist League Election Campaign"
 [[party]]
 code = "CON"
 name = "Conservative"
-aliases = ["Welsh Conservatives"]
+aliases = ["Welsh Conservatives", "Scottish Conservative and Unionist Party", "SCOTTISH CONSERVATIVE AND UNIONIST PARTY"]
 
 [[party]]
 code = "CP"
@@ -171,6 +174,7 @@ name = "Church of the Militant Elvis Party"
 [[party]]
 code = "FA"
 name = "Freedom Alliance"
+aliases = ["Freedom Alliance – Integrity, Society, Economy", "FREEDOM ALLIANCE - INTEGRITY, SOCIETY, ECONOMY"]
 
 [[party]]
 code = "FVP"
@@ -237,7 +241,7 @@ name = "Kingston Independent Residents Group"
 [[party]]
 code = "LAB"
 name = "Labour"
-aliases = ["Welsh Labour"]
+aliases = ["Welsh Labour", "Scottish Labour Party", "SCOTTISH LABOUR PARTY"]
 
 [[party]]
 code = "LCI"
@@ -246,11 +250,12 @@ name = "Liverpool Community Independents"
 [[party]]
 code = "LD"
 name = "Liberal Democrat"
-aliases = ["Welsh Liberal Democrats"]
+aliases = ["Welsh Liberal Democrats", "Scottish Liberal Democrats", "SCOTTISH LIBERAL DEMOCRATS"]
 
 [[party]]
 code = "LIB"
 name = "Liberal"
+aliases = ["The Liberal Party"]
 
 [[party]]
 code = "LNIN"
@@ -347,10 +352,12 @@ name = "Rebooting Democracy"
 [[party]]
 code = "REF"
 name = "Reform UK"
+aliases = ["REFORM UK"]
 
 [[party]]
 code = "REN"
 name = "Renew"
+aliases = ["RENEW", "SCOTTISH RENEW"]
 
 [[party]]
 code = "REU"
@@ -359,6 +366,7 @@ name = "Rejoin EU"
 [[party]]
 code = "SCOTLIBT"
 name = "Scottish Libertarian Party"
+aliases = ["SCOTTISH LIBERTARIAN PARTY"]
 
 [[party]]
 code = "SDA"
@@ -371,6 +379,7 @@ name = "Social Democratic & Labour Party"
 [[party]]
 code = "SDP"
 name = "Social Democratic Party"
+aliases = ["SOCIAL DEMOCRATIC PARTY"]
 
 [[party]]
 code = "SEP"
@@ -387,6 +396,7 @@ name = "Stockport Fights Austerity No To Cuts"
 [[party]]
 code = "SFP"
 name = "Scottish Family Party"
+aliases = ["SCOTTISH FAMILY PARTY"]
 
 [[party]]
 code = "SG"
@@ -395,6 +405,7 @@ name = "Shared Ground"
 [[party]]
 code = "SGP"
 name = "Scottish Green Party"
+aliases = ["SCOTTISH GREEN PARTY"]
 
 [[party]]
 code = "SHRP"
@@ -419,6 +430,7 @@ name = "Space Navies Party"
 [[party]]
 code = "SNP"
 name = "Scottish National Party"
+aliases = ["Scottish National Party (SNP)", "SCOTTISH NATIONAL PARTY (SNP)"]
 
 [[party]]
 code = "SPGB"
@@ -459,7 +471,7 @@ name = "Transform Party"
 [[party]]
 code = "TUSC"
 name = "Trade Unionist and Socialist Coalition"
-aliases = ["Welsh Trade Unionist and Socialist Coalition"]
+aliases = ["Welsh Trade Unionist and Socialist Coalition", "Scottish Trade Unionist and Socialist Coalition", "SCOTTISH TRADE UNIONIST AND SOCIALIST COALITION"]
 
 [[party]]
 code = "TUV"
@@ -472,6 +484,7 @@ name = "The Universal Good Party"
 [[party]]
 code = "UKIP"
 name = "UK Independence Party"
+aliases = ["UK Independence Party (UKIP)", "UK INDEPENDENCE PARTY (UKIP)"]
 
 [[party]]
 code = "UKV"
@@ -492,6 +505,7 @@ name = "Volt United Kingdom"
 [[party]]
 code = "WEP"
 name = "Women's Equality Party"
+aliases = ["SCOTTISH WOMEN'S EQUALITY PARTY"]
 
 [[party]]
 code = "WPB"
@@ -534,3 +548,38 @@ name = "Open Party"
 [[party]]
 code = "WCP"
 name = "Welsh Christian Party"
+
+[[party]]
+code = "ASPP"
+name = "Abolish the Scottish Parliament Party"
+aliases = ["ABOLISH THE SCOTTISH PARLIAMENT PARTY"]
+
+[[party]]
+code = "AFU"
+name = "All for Unity"
+aliases = ["ALL FOR UNITY"]
+
+[[party]]
+code = "IGV"
+name = "Independent Green Voice"
+aliases = ["INDEPENDENT GREEN VOICE"]
+
+[[party]]
+code = "RSC"
+name = "Restore Scotland"
+aliases = ["RESTORE SCOTLAND"]
+
+[[party]]
+code = "SCF"
+name = "Scotia Future"
+aliases = ["SCOTIA FUTURE"]
+
+[[party]]
+code = "RECL"
+name = "The Reclaim Party"
+aliases = ["THE RECLAIM PARTY"]
+
+[[party]]
+code = "VAN"
+name = "Vanguard Party"
+aliases = ["VANGUARD PARTY"]

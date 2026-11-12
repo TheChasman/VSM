@@ -15,6 +15,8 @@ LOADERS = {
     "ons_wd_pcon_lad_lookup",
     "arcgis_names_codes",
     "senedd_briefing_pdf",
+    "ons_spc_spr_lookup",
+    "holyrood_emb_xlsx",
 }
 
 

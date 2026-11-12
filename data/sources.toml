@@ -82,3 +82,33 @@ office = "devolved"
 boundary_set = "SENC2026"
 polling_date = "2026-05-07"
 layer = "SENC2026"
+
+[[source]]
+id = "spc2021_spr2021_lookup"
+# ONS Scottish Parliamentary Constituency to Region (December 2020) Lookup in Scotland: the last
+# vintage before the 2021-05-06 poll (2011 boundaries, used 2011-2021). 73 rows, queried as JSON.
+url = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/SPC20_SPR20_SC_LU_9efd93f73c4045a595da4750996f4561/FeatureServer/0/query?where=1%3D1&outFields=SPC20CD,SPC20NM,SPR20CD,SPR20NM&orderByFields=SPC20CD&returnGeometry=false&f=json"
+licence = "OGL-3.0"
+sha256 = "55b1959c200ba7557f664b99eba8c8d0aeff170b3caa5151e54258dc774955d4"
+file = "ons/spc20-spr20-sc-lu.json"
+loader = "ons_spc_spr_lookup"
+redistributable = true
+layer = "SPC2021"
+
+[[source]]
+id = "sp2021_emb_results"
+# Electoral Management Board for Scotland (EMB), "SPE21 - Full Votes and Seats by
+# Party/Candidate": constituency votes and winners, regional list votes and seats. Official and
+# machine-readable, but its reuse terms are not stated, so kept in data/private and not
+# redistributed (see data/LICENCES.md).
+url = "https://www.emb.scot/downloads/file/815/spe21-full-votes-and-seats-by-party-candidate"
+licence = "EMB-unstated"
+sha256 = "237d15f6115a28a1c8f007a4ffb5b96c912bb344b37b74ec06e3cf55a000f6cb"
+file = "holyrood/spe21-full-votes-and-seats.xlsx"
+loader = "holyrood_emb_xlsx"
+redistributable = false
+election_id = "SP2021"
+office = "devolved"
+boundary_set = "SPC2021"
+polling_date = "2021-05-06"
+layer = "SPC2021"
