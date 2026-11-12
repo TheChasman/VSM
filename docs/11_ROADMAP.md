@@ -25,7 +25,7 @@ Effort estimates are left as TODO. No code exists yet, and estimates would be gu
   - X1 and X2 reproduce methodology table §4.4.
   - The local checks (`just all`, pre-commit hook) run the fixture pipeline. No hosted CI (owner standing order).
 - **Estimated effort**: <!-- TODO -->
-- **Status**: In progress (2026-11-12, branch `feature/count-foundations`). Met: `justfile` and licence files; `reference.sqlite` built from pinned checksums and reproduced by `just verify`; all four golden tests; X1 and X2. Open: the repository is not yet public; the fixture pipeline does not exist yet, because the stages it runs (`districts`, `run`, `metrics`, `views`, `publish`) are not built.
+- **Status**: Done except the fixture pipeline (2026-11-12, merged to `main`). Met: public repository (history audited: no private data, no secrets), `justfile` and licence files; `reference.sqlite` built from pinned checksums and reproduced by `just verify`; all four golden tests; X1 and X2. Deferred: the fixture pipeline, because the stages it runs (`districts`, `run`, `metrics`, `views`, `publish`) are built in Phase 2. It becomes a Phase 2 exit criterion.
 
 ### Phase 2: Freeze, then Commons S0 lower bound
 
@@ -36,6 +36,7 @@ Effort estimates are left as TODO. No code exists yet, and estimates would be gu
   - C01–C11 are scored on GE2024 under S0 across 20 plans, with preferential configurations handled as ADR-0008 decides.
   - Pareto, Punter and Fair Fight views are generated.
   - A minimal site is published, with S0 results clearly labelled as lower bounds.
+  - The local checks (`just all`) run the Wales fixture pipeline (carried over from Phase 1).
 - **Estimated effort**: <!-- TODO -->
 - **Status**: Not started
 
