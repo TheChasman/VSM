@@ -17,6 +17,10 @@ LOADERS = {
     "senedd_briefing_pdf",
     "ons_spc_spr_lookup",
     "holyrood_emb_xlsx",
+    "ons_wd_lad_2022_xlsx",
+    "lg2022_emb_xlsx",
+    "lg2022_ballot_zip",
+    "lg2022_stage_pdf",
 }
 
 

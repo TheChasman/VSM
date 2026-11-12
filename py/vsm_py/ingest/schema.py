@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 
 DDL = """
 CREATE TABLE IF NOT EXISTS meta (
@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS contest (
   valid_votes INTEGER NOT NULL,
   invalid_votes INTEGER,
   declared_at TEXT,
+  seats INTEGER CHECK (seats IS NULL OR seats > 0),  -- vacancies; NULL where not recorded
   PRIMARY KEY (election_id, gss_code)
 );
 CREATE TABLE IF NOT EXISTS candidate_result (
@@ -104,6 +105,34 @@ CREATE TABLE IF NOT EXISTS candidate_result (
   votes INTEGER NOT NULL,
   elected INTEGER NOT NULL CHECK (elected IN (0, 1)),
   PRIMARY KEY (election_id, gss_code, candidate_seq),
+  FOREIGN KEY (election_id, gss_code) REFERENCES contest(election_id, gss_code)
+);
+CREATE TABLE IF NOT EXISTS stv_candidate (
+  election_id TEXT NOT NULL,
+  gss_code TEXT NOT NULL,
+  candidate_seq INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  stage_elected INTEGER CHECK (stage_elected IS NULL OR stage_elected >= 1),  -- NULL: not elected
+  PRIMARY KEY (election_id, gss_code, candidate_seq),
+  FOREIGN KEY (election_id, gss_code, candidate_seq)
+    REFERENCES candidate_result(election_id, gss_code, candidate_seq)
+);
+CREATE TABLE IF NOT EXISTS stv_ballot (
+  election_id TEXT NOT NULL,
+  gss_code TEXT NOT NULL,
+  ballot_seq INTEGER NOT NULL,
+  weight INTEGER NOT NULL CHECK (weight > 0),  -- identical papers
+  ranking TEXT NOT NULL,  -- candidate_seq values, space-separated, first preference first
+  PRIMARY KEY (election_id, gss_code, ballot_seq),
+  FOREIGN KEY (election_id, gss_code) REFERENCES contest(election_id, gss_code)
+);
+CREATE TABLE IF NOT EXISTS stv_stage (
+  election_id TEXT NOT NULL,
+  gss_code TEXT NOT NULL,
+  stage INTEGER NOT NULL CHECK (stage >= 1),
+  candidate_seq INTEGER NOT NULL,  -- 0: non-transferable (including rounding)
+  votes_e5 INTEGER NOT NULL,  -- declared total, in units of 10^-5 votes
+  PRIMARY KEY (election_id, gss_code, stage, candidate_seq),
   FOREIGN KEY (election_id, gss_code) REFERENCES contest(election_id, gss_code)
 );
 """

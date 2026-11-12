@@ -185,7 +185,7 @@ def load(
                     (c.gss, c.name, c.nation, c.region, c.electorate, int(c.name in PROTECTED)),
                 )
             conn.execute(
-                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, ?)",
+                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, ?, NULL)",
                 (eid, c.gss, c.electorate, c.valid, c.invalid, c.declared_at),
             )
             conn.executemany(

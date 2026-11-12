@@ -192,7 +192,7 @@ def load(
         for c in parsed:
             gss = codes[c.name]
             conn.execute(
-                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, NULL)",
+                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, NULL, NULL)",
                 (eid, gss, c.electorate, c.valid, c.rejected),
             )
             seq_of = {}

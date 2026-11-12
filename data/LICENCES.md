@@ -24,7 +24,10 @@ Each source in `data/sources.toml` needs an entry here before its files ship in 
 | ONS Senedd Cymru Constituencies (May 2026) Names and Codes | OGL v3.0 | Source: Office for National Statistics licensed under the Open Government Licence v3.0 | Yes |
 | ONS Scottish Parliamentary Constituency to Region (December 2020) Lookup in Scotland | OGL v3.0 | Source: Office for National Statistics licensed under the Open Government Licence v3.0 | Yes |
 | Electoral Management Board for Scotland (EMB), "SPE21 - Full Votes and Seats by Party/Candidate" (Holyrood 2021 results) | Reuse terms not stated on emb.scot | <!-- TODO: confirm reuse terms with the EMB --> | **No**, until terms are confirmed (kept in `data/private/`) |
-| Scottish council ballot collections | <!-- TODO: confirm --> | <!-- TODO --> | Only if the licence allows |
+| ONS Ward to Local Authority District (May 2022) Lookup in the UK | OGL v3.0 | Source: Office for National Statistics licensed under the Open Government Licence v3.0 | Yes |
+| EMB, "Local Government Elections 2022 results (updated with postals/station split)" (Scottish council 2022 declared results) | Reuse terms not stated on emb.scot | <!-- TODO: confirm reuse terms with the EMB --> | **No**, until terms are confirmed (kept in `data/private/`) |
+| Scottish council 2022 preference profiles (the 32 returning officers' published files, collected by Denis Mollison, Heriot-Watt University: `SC2022_ballot_format.zip`) | No licence stated by the collector or uniformly by the councils | <!-- TODO: confirm with D. Mollison and the councils --> | **No**, until terms are confirmed (kept in `data/private/`) |
+| City of Edinburgh Council "Candidate Votes Per Stage" reports, 2022 (17 wards) | Council copyright; reuse terms not stated | <!-- TODO: confirm with the council --> | **No**, until terms are confirmed (kept in `data/private/`) |
 | 2024 constituency hex layout | <!-- TODO: confirm (Q-H2) --> | <!-- TODO --> | Only if the licence allows |
 | Chapel Hill Expert Survey (CHES) | <!-- TODO: confirm --> | <!-- TODO --> | Only if the licence allows |
 | BES respondent-level panel | BES terms of use | n/a | **Never** |

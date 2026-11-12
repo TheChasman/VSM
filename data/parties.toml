@@ -76,6 +76,7 @@ name = "Birkenhead Social Justice Party"
 [[party]]
 code = "BUP"
 name = "British Unionist Party B.U.P."
+aliases = ["British Unionist Party"]
 
 [[party]]
 code = "CANDI"
@@ -174,7 +175,7 @@ name = "Church of the Militant Elvis Party"
 [[party]]
 code = "FA"
 name = "Freedom Alliance"
-aliases = ["Freedom Alliance – Integrity, Society, Economy", "FREEDOM ALLIANCE - INTEGRITY, SOCIETY, ECONOMY"]
+aliases = ["Freedom Alliance – Integrity, Society, Economy", "FREEDOM ALLIANCE - INTEGRITY, SOCIETY, ECONOMY", "Freedom Alliance- Integrity, Society, Economy"]
 
 [[party]]
 code = "FVP"
@@ -501,6 +502,7 @@ name = "Veterans and People's Party"
 [[party]]
 code = "VUK"
 name = "Volt United Kingdom"
+aliases = ["Volt UK"]
 
 [[party]]
 code = "WEP"
@@ -583,3 +585,21 @@ aliases = ["THE RECLAIM PARTY"]
 code = "VAN"
 name = "Vanguard Party"
 aliases = ["VANGUARD PARTY"]
+
+# First seen in the 2022 Scottish council elections (EMB workbook, AffiliationNational).
+
+[[party]]
+code = "SEFP"
+name = "Scottish Eco-Federalist Party"
+
+[[party]]
+code = "PENP"
+name = "The Pensioner's Party"
+
+[[party]]
+code = "RUBP"
+name = "The Rubbish Party"
+
+[[party]]
+code = "WDCP"
+name = "West Dunbartonshire Community Party"

@@ -112,3 +112,238 @@ office = "devolved"
 boundary_set = "SPC2021"
 polling_date = "2021-05-06"
 layer = "SPC2021"
+
+[[source]]
+id = "wd2022_lad2022_lookup"
+# ONS "Ward to Local Authority District (May 2022) Lookup in the UK" (xlsx, labelled provisional):
+# the wards in force at the 2022-05-05 Scottish council elections. Only the 355 Scottish rows
+# are loaded; they are identical to the December 2022 vintage.
+url = "https://www.arcgis.com/sharing/rest/content/items/96172380bb7d429bac154d03bf35a651/data"
+licence = "OGL-3.0"
+sha256 = "29ebdbb729709c7da354c744fe356672ef68c7ae7359f3ff49c3e43c1168f718"
+file = "ons/wd22-lad22-uk-lu-may-2022.xlsx"
+loader = "ons_wd_lad_2022_xlsx"
+redistributable = true
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_emb_results"
+# Electoral Management Board for Scotland (EMB), "Local Government Elections 2022 results
+# (updated with postals/station split)": the returning officers' results returns, one row per
+# candidate (first preferences, elected, stage elected). Reuse terms not stated: private.
+url = "https://www.emb.scot/downloads/file/980/local-government-elections-2022-results-updated-with-postals-station-split"
+licence = "EMB-unstated"
+sha256 = "68ef0070aa6f5dfd0425997b0c959edf7c8eb2a3fa16aa5f4a870ec41ae19822"
+file = "council/lge22-emb-results.xlsx"
+loader = "lg2022_emb_xlsx"
+redistributable = false
+election_id = "LG2022S"
+office = "council"
+boundary_set = "WD2022S"
+polling_date = "2022-05-05"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_ballots"
+# Preference profiles for all 355 wards as published by the 32 returning officers, collected
+# and reformatted ("ballot format") by Denis Mollison, Heriot-Watt University. No licence is
+# stated: private. Cross-checked per ward against the EMB returns (ballots, first preferences).
+url = "https://www.macs.hw.ac.uk/~denis/stv_elections/SC2022/SC2022_ballot_format.zip"
+licence = "unstated (returning officers' published data, collected by D. Mollison)"
+sha256 = "0bfbb374f1f9cd305bc783a53dfaa31703cc0fab3ef31aaccba4443000f4e63d"
+file = "council/SC2022_ballot_format.zip"
+loader = "lg2022_ballot_zip"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+# City of Edinburgh Council "Candidate Votes Per Stage" reports: declared stage totals for its
+# 17 wards (the only council whose stage reports are loaded so far). Council copyright, reuse
+# terms not stated: private.
+
+[[source]]
+id = "lg2022_edinburgh_stages_w01"
+url = "https://www.edinburgh.gov.uk/downloads/file/31068/candidate-votes-per-stage-report"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "d758f2014211a8f9d4d786fa60e879aed2f9035094df9722cf0b85b8603b9c65"
+file = "council/edinburgh/ward-01-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w02"
+url = "https://www.edinburgh.gov.uk/downloads/file/31081/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "4eb3f650719d9b59c08d743b4de85de6298b520930eb9b78a2ef3e4514a72e4a"
+file = "council/edinburgh/ward-02-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w03"
+url = "https://www.edinburgh.gov.uk/downloads/file/31087/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "d1c1f22e3bb99b15cb17619d831a72033fb0902a75dcb2ba5ff7ae6e3506696b"
+file = "council/edinburgh/ward-03-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w04"
+url = "https://www.edinburgh.gov.uk/downloads/file/31093/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "ff7e9c4552fe01fe4c70864bf43fbc0ecf3a3f1270296843082a6b8cae1b3ea4"
+file = "council/edinburgh/ward-04-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w05"
+url = "https://www.edinburgh.gov.uk/downloads/file/31100/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "93ab7f5168601be98cb973762490624521dccea962fbc5ab1f3c9b5d4ddbc4bc"
+file = "council/edinburgh/ward-05-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w06"
+url = "https://www.edinburgh.gov.uk/downloads/file/31108/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "735be056545c71a0441b5b29e738dd8049796db3db15b8b8b05f3b4c6f81303b"
+file = "council/edinburgh/ward-06-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w07"
+url = "https://www.edinburgh.gov.uk/downloads/file/31114/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "82e6bd6f9c4feae808bc43ca6da4b4db1281d1a78a59c6f48ce1f33e95992c65"
+file = "council/edinburgh/ward-07-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w08"
+url = "https://www.edinburgh.gov.uk/downloads/file/31123/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "d86ced2efe440e8f2a087c7b576438a56345f68bcf29157ecc7c4f8c3ad9eeaa"
+file = "council/edinburgh/ward-08-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w09"
+url = "https://www.edinburgh.gov.uk/downloads/file/31131/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "8144b94bdaab900cba646a02c111c83e77933a130282c33d4209e1a746420996"
+file = "council/edinburgh/ward-09-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w10"
+url = "https://www.edinburgh.gov.uk/downloads/file/31139/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "86544f2b4e944c79d06374b7a191647cface292fd56e2393bac08c9759987a23"
+file = "council/edinburgh/ward-10-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w11"
+url = "https://www.edinburgh.gov.uk/downloads/file/31146/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "7233f591ff8b2ef555d8f3658bbcc3f0bb08a16f584e23cb957791b4d8ca2a81"
+file = "council/edinburgh/ward-11-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w12"
+url = "https://www.edinburgh.gov.uk/downloads/file/31154/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "03fa3806dff47b1b4370d116807c27146f146696d5f977ff30b4057cacc04efc"
+file = "council/edinburgh/ward-12-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w13"
+url = "https://www.edinburgh.gov.uk/downloads/file/31160/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "e2090cb8b6764a95b86e39e8991cc5ab79a540d1cdf9a770ced59396248b14df"
+file = "council/edinburgh/ward-13-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w14"
+url = "https://www.edinburgh.gov.uk/downloads/file/31168/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "df941d434cc8ccf8e20ab7d5c440f8b1996eb1e1e5e80814621747fc8944697d"
+file = "council/edinburgh/ward-14-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w15"
+url = "https://www.edinburgh.gov.uk/downloads/file/31172/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "3261dbd616500f03f17d30d1bb394ee5c3dfb5f9b412aee560270a8f9903c2ed"
+file = "council/edinburgh/ward-15-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w16"
+url = "https://www.edinburgh.gov.uk/downloads/file/31179/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "5f386c37d8d8dbea7ce6c531baa4a5d7c35d7660cf377f71bedd7969af700afe"
+file = "council/edinburgh/ward-16-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"
+
+[[source]]
+id = "lg2022_edinburgh_stages_w17"
+url = "https://www.edinburgh.gov.uk/downloads/file/31187/candidate-votes-per-stage"
+licence = "City-of-Edinburgh-Council-unstated"
+sha256 = "5b58100b9b672b4cb034ff7fe48fd23761f64d0eae17e955b3c5c0911496dda6"
+file = "council/edinburgh/ward-17-candidate-votes-per-stage.pdf"
+loader = "lg2022_stage_pdf"
+redistributable = false
+election_id = "LG2022S"
+layer = "WD2022S"

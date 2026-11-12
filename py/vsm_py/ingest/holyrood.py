@@ -295,7 +295,7 @@ def load_emb_workbook(
         for c in cons:
             gss = ccode[c.name]
             conn.execute(
-                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, NULL)",
+                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, NULL, NULL)",
                 (eid, gss, c.electorate, c.valid, c.rejected),
             )
             ranked = sorted(c.votes.items(), key=lambda kv: (-kv[1], kv[0]))
@@ -309,7 +309,7 @@ def load_emb_workbook(
         for g in regs:
             gss = rcode[g.name]
             conn.execute(
-                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, NULL)",
+                "INSERT INTO contest VALUES (?, ?, ?, ?, ?, NULL, NULL)",
                 (eid, gss, g.electorate, g.valid, g.rejected),
             )
             ranked = sorted(g.votes.items(), key=lambda kv: (-kv[1], kv[0]))

@@ -141,6 +141,7 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | valid_votes | INTEGER | no | Ingest stops unless candidate votes sum to this |
 | invalid_votes | INTEGER | yes | |
 | declared_at | TEXT | yes | Declaration time where the source gives one (candidate source for sub-metric I2) |
+| seats | INTEGER | yes | Vacancies in a multi-member contest (Scottish council wards, 1–5); NULL where not recorded. A ward with fewer candidates than seats leaves vacancies unfilled (schema version 6) |
 
 #### geography_layer
 
@@ -184,6 +185,42 @@ Types are SQLite affinities. `TEXT` IDs are human-readable codes such as Office 
 | party_code | TEXT | no | `IND` for independents |
 | votes | INTEGER | no | |
 | elected | INTEGER | no | 0 or 1 |
+
+#### stv_candidate
+
+- **Purpose**: Single Transferable Vote (STV) candidate detail: the name as published and the declared stage of election. One row per `candidate_result` row of an STV election (schema version 6).
+- **Primary key**: `(election_id, gss_code, candidate_seq)`, FK to `candidate_result`
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| name | TEXT | no | As in the results source. Display data only; never a join key |
+| stage_elected | INTEGER | yes | Declared stage at which the candidate was elected; NULL if not elected. Uncontested wards record 1 |
+
+#### stv_ballot
+
+- **Purpose**: Observed ranked ballots of an STV contest (returning officers' preference profiles), as bundles of identical papers (schema version 6).
+- **Primary key**: `(election_id, gss_code, ballot_seq)`
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| weight | INTEGER | no | Number of identical papers |
+| ranking | TEXT | no | `candidate_seq` values in preference order, space-separated, e.g. `3 1 4` |
+
+Ingest stops unless weights sum to `contest.valid_votes` and first preferences per candidate equal `candidate_result.votes`.
+
+#### stv_stage
+
+- **Purpose**: Declared STV stage totals, where a returning officer publishes them (schema version 6).
+- **Primary key**: `(election_id, gss_code, stage, candidate_seq)`
+- **Owner**: ingest
+
+| Field | Type | Nullable | Notes |
+|-------|------|----------|-------|
+| stage | INTEGER | no | 1 = first preferences |
+| candidate_seq | INTEGER | no | 0 = non-transferable papers, including value lost to truncation |
+| votes_e5 | INTEGER | no | Declared total in units of 10^-5 votes (the Scottish rules' five decimal places). Each stage sums to `valid_votes` × 10^5 |
 
 #### ballot_profile
 
