@@ -85,3 +85,8 @@ STV (needs ADR-0006 fixed-point), contingent, compensatory top-up, golden tests 
 - New dependency `openpyxl` (reads the xlsx). Cross-checks: candidate and list votes sum to valid votes (ballots less rejected), one winner per constituency, 73 constituencies, 8 regions of 7 seats, and every named party's votes and seats in both tiers agree with the Summary sheet.
 - Party registry: Scottish branch spellings added as aliases (e.g. Scottish Labour Party → `LAB`, Scottish Renew → `REN`); seven new codes for parties first seen here (ASPP, AFU, IGV, RSC, SCF, RECL, VAN).
 - The golden test passed first time: no ties, every region's list seats and the national 64/31/22/8/4 reproduced.
+
+## Slice 10: Scottish council 2022 STV golden test
+
+21. **Ward ballot data**: the 2022 Scottish council election preference profiles (full ranked ballots per ward, as published by each council's returning officer) for all 355 wards of 1–5 members, plus the declared results (elected candidates, and stage totals where published). Layer for 2022 wards registered per ADR-0014. Pinned SHA-256 per file. Cross-checks: ballot count matches the declared valid vote and first-preference totals per candidate, seat count matches the ward's vacancies. Licence and redistributability recorded per council.
+22. **Golden test** `golden_lg2022_stv.rs`: `stv_wigm_droop` (ADR-0006 fixed point, five decimals unless the Order says otherwise) reproduces the elected candidates in every ward, and the declared stage totals wherever they are available. Any ward that does not match is investigated to a stated cause, never skipped silently.
